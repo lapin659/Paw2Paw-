@@ -10,9 +10,9 @@ import java.util.function.Predicate;
 public class ProductService {
     public List<Product> getAllProducts(){
         List<Product> listOfProducts = new ArrayList<>();
-        listOfProducts.add(new Product("123", "IPHONE X", "This is Awesome Iphone ", 400.4, "Apple Inc"));
-        listOfProducts.add(new Product("124", "Samsung Y", "This is Awesome Samsung ", 300.4, "Samsung Inc"));
-        listOfProducts.add(new Product("125", "LG Z", "This is Awesome LG ", 200.4, "LG Inc"));
+        listOfProducts.add(new Product("123", "Cat bed", "look for canned food sampler ", 15, "Cat person"));
+        listOfProducts.add(new Product("124", "Dog leash", "look for dog toy ", 10, "Dog person"));
+        listOfProducts.add(new Product("125", "1-hr dog walk", "look for 2-day cat sitting ", 20, "Pet person"));
 
         return listOfProducts;
     }
