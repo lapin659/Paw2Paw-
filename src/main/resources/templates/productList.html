@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -46,14 +46,16 @@
                             <h5 class="card-title" th:text= "${product.productName}">Product name</h5>
                         </td>
                         <td>
-                            [[${product.price}]]
+                            <p class="card-text" th:text = " '$' + ${product.price}"></p>
+                            <p class="card-text" th:text = "${product.seller}"></p>
+                            <p class="card-text" th:text = "${product.description}"> </p>
                         </td>
                     </tr>
                     <!--
 
-                    <p class="card-text" th: text = "${product.price}">Price</p>
+
                     -->
-                    <a href="productList.html" class="btn btn-primary">Trade</a>
+                    <a href="productList.html" class="btn btn-primary">Exchange</a>    <a href="productList.html" class="btn btn-primary">Buy</a>
                 </div>
             </div>
         </div>
