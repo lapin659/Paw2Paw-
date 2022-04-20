@@ -1,10 +1,19 @@
 package com.webapp.paw2paw.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="products")
 public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, unique = true,length = 20)
     private String productId;
+    @Column(nullable = false, unique = true, length = 20)
     private String productName;
     private String description;
     private double price;
+    @Column(nullable = false, unique = true,length = 20)
     private String seller;
 
     public Product(String productId, String productName, String description, double price, String seller) {
@@ -14,6 +23,10 @@ public class Product {
         this.description = description;
         this.price = price;
         this.seller = seller;
+    }
+
+    public Product() {
+
     }
 
     public String getProductId() {
