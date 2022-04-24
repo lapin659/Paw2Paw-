@@ -8,11 +8,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false, unique = true, length = 20)
+    @Column(unique = true, length = 20)
     private String username;
-    @Column(nullable = false, length = 64)
+    @Column(length = 64)
     private String password;
-    @Column(nullable = false, unique = true, length = 20)
+    @Column(unique = true, length = 20)
     private String email;
 
     public Long getId() {
