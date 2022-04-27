@@ -7,13 +7,13 @@ import javax.persistence.*;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, unique = true,length = 20)
+    @Column(unique = true,length = 20)
     private String productId;
-    @Column(nullable = false, unique = true, length = 20)
+    @Column(unique = true, length = 20)
     private String productName;
     private String description;
     private double price;
-    @Column(nullable = false, unique = true,length = 20)
+    @Column(unique = true,length = 20)
     private String seller;
 
     public Product(String productId, String productName, String description, double price, String seller) {

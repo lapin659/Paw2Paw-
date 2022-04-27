@@ -28,6 +28,19 @@ public class productListController {
         return "productList";
     }
 
+    @GetMapping("/exchange.html")
+    public String exchangeProduct(Model model){
+        List<Product> exchangeProduct = productService.getAllProducts();
+        model.addAttribute("products", exchangeProduct);
+        return "exchange";
+    }
+
+
+
+
+
+
+
     /**  public productListController(ProductService productService) {
         this.productService = productService;
     }
