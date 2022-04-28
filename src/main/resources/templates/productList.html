@@ -51,7 +51,7 @@
                             <p class="card-text" th:text = "${product.description}"> </p>
                         </td>
                     </tr>
-                    <a href="exchange.html" class="btn btn-primary">Exchange</a>    <a href="exchange.html" class="btn btn-primary">Buy</a>
+                    <a th:href="@{/exchange/{productId}(productId = ${product.productId})}" class="btn btn-primary" >Exchange</a>    <a href="exchange.html" class="btn btn-primary">Buy</a>
                 </div>
             </div>
         </div>

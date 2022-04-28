@@ -17,25 +17,19 @@
   <!---form to confirm the exchange, offer alternative item, msg seller  -->
 
 </div>
-<div class="row" xmlns:th="http://www.thymeleaf.org">
- <form>
-    <div class="card mb-3">
-      <div class="card-body">
-        <tr>
-          <!--
-          <td>
-            <h5 class="card-title" th:text= "${products.name}">Product name</h5>
-          </td>
-          <td>
-            <p class="card-text" th:text = " '$' + ${product.price}"></p>
-            <p class="card-text" th:text = "${product.seller}"></p>
-            <p class="card-text" th:text = "${product.description}"> </p>
-          </td> -->
-        </tr>
-        <a href="productList.html" class="btn btn-primary">Confirm</a>    <a href="productList.html" class="btn btn-primary">Buy</a>
-      </div>
-    </div>
-  </form>
+<div  xmlns:th="http://www.thymeleaf.org">
+
+     <p th:text = " '$' + ${exchange.price}"></p>
+
+            <h5 th:text= "${exchange.seller}">Product name</h5>
+
+          <!--<td>
+            <p class="card-text" th:text = " '$' + ${product.price}"></p> </td>
+           <td> <p class="card-text" th:text = "${product.seller}"></p></td>
+            <td><p class="card-text" th:text = "${products.description}"> </p></td>-->
+
+        <a href="productList.html" class="btn btn-primary">Confirm</a>
+
 </div>
 </body>
 </html>
