@@ -12,24 +12,35 @@
 <body>
 <div class="container text-center">
 
-  <h3>Welcome, XXX! </h3>
-    <!---configure controller -->
+
   <!---form to confirm the exchange, offer alternative item, msg seller  -->
 
 </div>
-<div  xmlns:th="http://www.thymeleaf.org">
-
-     <p th:text = " '$' + ${exchange.price}"></p>
-
-            <h5 th:text= "${exchange.seller}">Product name</h5>
-
-          <!--<td>
-            <p class="card-text" th:text = " '$' + ${product.price}"></p> </td>
-           <td> <p class="card-text" th:text = "${product.seller}"></p></td>
-            <td><p class="card-text" th:text = "${products.description}"> </p></td>-->
-
-        <a href="productList.html" class="btn btn-primary">Confirm</a>
-
+<div xmlns:th="http://www.thymeleaf.org">
+            <h5 th:text= "${exchange.productName}">Product name</h5>
+    <form action = "user_profile.html" method="post" th:object="${exchange.productName}">
+    <div class="form-group row">
+            <legend class="col-form-label col-sm-2 pt-0">Select item to exchange with</legend>
+            <div class="col-sm-10">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                    <label class="form-check-label" for="gridRadios1" th:text = "${exchange.description}">
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                    <label class="form-check-label" for="gridRadios2">
+                        Other, please specify below
+                    </label>
+                </div>
+                <label th:text = "'Message  '+ ${exchange.seller}" >  </label>
+                <br/>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+         </div>
+    </div>
+        <button type="submit" class="btn btn-primary">Confirm Exchange</button>
+    </form>
 </div>
+
 </body>
 </html>

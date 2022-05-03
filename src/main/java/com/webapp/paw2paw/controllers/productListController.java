@@ -13,7 +13,8 @@ import java.util.List;
 
 public class productListController {
 
-    @Autowired  private ProductService productService;
+    @Autowired
+    private ProductService productService;
 
     @GetMapping("/productList.html")
     public String listProducts(Model model){
@@ -21,6 +22,11 @@ public class productListController {
         model.addAttribute("products", listProducts);
         return "productList";
     }
+
+
+
+
+
 /**
     @GetMapping("/{productId}")
     public String exchangeProduct(Model model, @PathVariable("productId") String productId){

@@ -15,6 +15,7 @@ public class Product {
     private double price;
     @Column(unique = true,length = 20)
     private String seller;
+   // private MultipartFile image;
 
     public Product(String productId, String productName, String description, double price, String seller) {
         super();

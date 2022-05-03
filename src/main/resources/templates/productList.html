@@ -35,11 +35,31 @@
         </div>
     </div>
 </nav>
+<div class="row">
+    <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+            <img src="https://assets.petco.com/petco/image/upload/c_pad,dpr_1.0,f_auto,q_auto,h_468,w_500/c_pad,h_468,w_500/2897122-right-1">
+        </div>
+    </div>
+    <div class="col-sm-4 col-md-4">
+        <div class>
+            <img src="https://assets.petco.com/petco/image/upload/c_pad,dpr_1.0,f_auto,q_auto,h_468,w_500/c_pad,h_468,w_500/2686026-center-1" >
+        </div>
+    </div>
+    <div class="col-sm-4 col-md-4">
+        <div class="thumbnail">
+            <img src="https://assets.petco.com/petco/image/upload/c_pad,dpr_1.0,f_auto,q_auto,h_468,w_500/c_pad,h_468,w_500/3403518-center-2">
+        </div>
+    </div>
+</div>
+
+
      <div class="row" xmlns:th="http://www.thymeleaf.org">
-          <div th:each="product, stat: ${products}" class="col-sm-4">
+
+         <div th:each="product, stat: ${products}" class="col-sm-4">
             <div class="card mb-3">
-               <img class="card-img-top" src="https://assets.petco.com/petco/image/upload/c_pad,dpr_1.0,f_auto,q_auto,h_468,w_500/c_pad,h_468,w_500/2897122-right-1" alt="Card image cap">
-                <!--<img th:attr="src=@{|/images/${nombre}.png|},title=${nombre},alt=${nombre}" /> -->
+                <!-- <img class="card-img-top" src="https://assets.petco.com/petco/image/upload/c_pad,dpr_1.0,f_auto,q_auto,h_468,w_500/c_pad,h_468,w_500/2897122-right-1" alt="Card image cap">
+               <img th:attr="src=@{|/images/${nombre}.png|},title=${nombre},alt=${nombre}" /> -->
                 <div class="card-body">
                     <tr>
                         <td>
