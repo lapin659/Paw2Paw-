@@ -14,6 +14,8 @@ public class UserProfile implements UserDetails {
         this.user = user;
     }
 
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
@@ -27,7 +29,8 @@ public class UserProfile implements UserDetails {
     @Override
     public String getUsername() {
         return user.getEmail();
-    }
+    } //getEmail()?
+
 
     @Override
     public boolean isAccountNonExpired() {
