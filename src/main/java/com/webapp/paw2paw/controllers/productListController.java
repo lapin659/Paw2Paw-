@@ -27,14 +27,5 @@ public class productListController {
 
 
 
-/**
-    @GetMapping("/{productId}")
-    public String exchangeProduct(Model model, @PathVariable("productId") String productId){
-       model.addAttribute("exchange", productService.getProductById(productId));
-        return "exchange";
-    }
-**/
-
-
 
 }
