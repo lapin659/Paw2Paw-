@@ -26,4 +26,12 @@ public class ProductService {
         return getAllProducts().stream().filter(strategy).findFirst().orElse(null);
     }
 
+
+
+
+
+
+
+
+
 }
