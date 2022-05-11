@@ -12,6 +12,13 @@ import java.security.Principal;
 @Controller
 public class userProfileController {
 
+    @GetMapping("/login")
+    public String showLogin(){
+        return "login";
+
+    }
+
+
     @GetMapping(value = {"/","/user_profile"})
     //@ResponseBody
     public String userProfile(Principal principal, Model model){

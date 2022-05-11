@@ -52,9 +52,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
-                .usernameParameter("email")
-                .defaultSuccessUrl("/user_profile")
-                .permitAll()
+                    .loginPage("/login")
+                    .usernameParameter("email")
+                    .permitAll()
+                    .defaultSuccessUrl("/user_profile")
                 .and()
                 .logout().logoutSuccessUrl("/").permitAll();
                 http.csrf().disable();

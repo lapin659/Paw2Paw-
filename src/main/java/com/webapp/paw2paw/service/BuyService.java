@@ -1,13 +1,10 @@
 package com.webapp.paw2paw.service;
 
-import com.webapp.paw2paw.model.Product;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Predicate;
 @Service
-public class ProductService {
+public class BuyService {
+    /**
     public List<Product> getAllProducts(){
         List<Product> listOfProducts = new ArrayList<>();
         listOfProducts.add(new Product("123", "Cat bed", "for canned food sampler ", 15, "Cat person A"));
@@ -16,17 +13,17 @@ public class ProductService {
 
         return listOfProducts;
     }
-    public Product getProductById(String productId) {
+    public OrderHistory getBuyByName(String orderItem) {
 
-        Predicate<Product> byId = p -> p.getProductId().equals(productId);
-        return filterProducts(byId);
+        Predicate<OrderHistory> byItem = p -> p.getOrderItem().equals(orderItem);
+        return byItem;
     }
 
-    public Product filterProducts(Predicate<Product> strategy) {
+    public OrderHistory filterProducts(Predicate<OrderHistory> strategy) {
         return getAllProducts().stream().filter(strategy).findFirst().orElse(null);
     }
 
-
+**/
 
 
 

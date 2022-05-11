@@ -9,28 +9,37 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 
-public class exchangeProductController {
+public class buyProductController {
 
     @Autowired
     private ProductService productService;
-    @Autowired
-    private OrderHistory submission;
 
-    @GetMapping("/exchange/{productId}")
-    public String exchangeProduct(Model model, @PathVariable("productId") String productId){
-       model.addAttribute("exchange", productService.getProductById(productId));
-       return "exchange";
+
+    @GetMapping("/buy/{productId}")
+    //public ModelAndView exchangeProduct(Model model, @PathVariable("productId") String productId){
+       public ModelAndView showForm(Model model, @PathVariable("productId") String productId){
+       model.addAttribute("buy", productService.getProductById(productId));
+       String orderProduct = productService.getProductById(productId).getProductName();
+
+       OrderHistory orderHistory = new OrderHistory(orderProduct,"","" );
+       model.addAttribute("orderHistory", orderHistory);
+       //return "buy";
+
+       return new ModelAndView("buy", "submission",
+               new OrderHistory(orderProduct, " "," "));
+
     }
 
-    @PostMapping("/save_exchange")
+    @PostMapping("/save_buy")
     public String exchangeSubmit(Model model,@ModelAttribute ("submission") OrderHistory submission){
-         model.addAttribute("submission", submission);
+         model.addAttribute("buyItem", submission.getExchangeItem());
+         model.addAttribute("message",submission.getBuyerMessage());
 
-        System.out.println(submission);
-        return "user_profile";
+        return "buy_saved";
     }
 
     /**

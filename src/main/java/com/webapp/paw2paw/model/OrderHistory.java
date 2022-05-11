@@ -16,6 +16,18 @@ public class OrderHistory {
         this.buyerMessage = buyerMessage;
     }
 
+
+    public OrderHistory(String orderItem, String buyerMessage) {
+        this.orderItem = orderItem;
+        this.buyerMessage = buyerMessage;
+    }
+
+    public OrderHistory(String orderItem) {
+        this.orderItem = orderItem;
+    }
+
+
+
     public OrderHistory(){
 
     }

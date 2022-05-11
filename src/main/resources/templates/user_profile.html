@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+>
 <head>
     <meta charset="ISO-8859-1">
     <title>User Profile</title>
@@ -12,16 +12,23 @@
 </head>
 <body>
 <!--ADD order/exchange history, nav bar, reformat profile photo, display username   -->
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#" >
+            <img alt="" th:src="@{'/images/' + ${currUsername} + '.jpg'}" width="50" height="50" class="d-inline-block align-top">
+            <span class="navbar-band mb-0 h3 mx-lg-auto ml-lg-auto" style="color:#e68534;" th:text="${currUsername}"> </span>
+        </a>
+    </nav>
+
+<!--
     <div class="container text-center">
-       <!-- <p th:field="${submission.exchangeItem}">   </p>-->
-        <h3>Welcome, <span class="username" th:text="${currUsername}" >Guest</span> </h3>
+        <p th:field="${submission.exchangeItem}">   </p>
+        <h3 style="color:#e68534;" >Welcome, <span class="username" th:text="${currUsername}" style="color:#e68534;" >Guest</span> </h3>
         <div sec:authorize = "isAuthenticated()"> <span sec:authentication="name" ></span> </div>
             <span class="profile-pic">
                 <img alt="" th:src="@{'/images/' + ${currUsername} + '.jpg'}" height="40" width="40">
             </span>
         <div th:text="${exchangeItem}"> exchange history  </div>
 
-    </div>
-
+    </div> -->
 </body>
 </html>

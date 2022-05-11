@@ -58,8 +58,6 @@
 
          <div th:each="product, stat: ${products}" class="col-sm-4">
             <div class="card mb-3">
-                <!-- <img class="card-img-top" src="https://assets.petco.com/petco/image/upload/c_pad,dpr_1.0,f_auto,q_auto,h_468,w_500/c_pad,h_468,w_500/2897122-right-1" alt="Card image cap">
-               <img th:attr="src=@{|/images/${nombre}.png|},title=${nombre},alt=${nombre}" /> -->
                 <div class="card-body">
                     <tr>
                         <td>
@@ -71,7 +69,7 @@
                             <p class="card-text" th:text = "${product.description}"> </p>
                         </td>
                     </tr>
-                    <a th:href="@{/exchange/{productId}(productId = ${product.productId})}" class="btn btn-outline-warning" >Exchange</a>     <a href="exchange.html" class="btn btn-outline-warning">Buy</a>
+                    <a th:href="@{/exchange/{productId}(productId = ${product.productId})}" class="btn btn-outline-warning" >Exchange</a>     <a th:href="@{/buy/{productId}(productId = ${product.productId})}" class="btn btn-outline-warning">Buy</a>
                 </div>
             </div>
         </div>
