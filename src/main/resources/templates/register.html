@@ -12,7 +12,7 @@
 <body>
 
 <nav class="navbar navbar-light bg-light navbar-expand-lg static-top">
-    <span class="navbar-brand mb-0 h1" href="/" style="color:#e68534;">Paw2Paw</span>
+    <a class="navbar-brand mb-0 h1 nav-link" href="homepage.html" style="color:#e68534;">Paw2Paw</a>
     <span class="nav-item  mx-lg-auto ml-lg-auto">
         <a class="nav-link disabled"  style="color:#e68534;">Sign Up</a>
     </span>
@@ -30,7 +30,7 @@
                 </br>
                 <div class="form-group row">
                     <label class="col-form-label col-4">Username</label>
-                    <div class="col-8"><input type="username" class="form-control" th:field="*{username}" required
+                    <div class="col-8"><input type="text" class="form-control" th:field="*{username}" required
                     minlength = "5" maxlength = "12"/></div>
                 </div>
                 <br/>

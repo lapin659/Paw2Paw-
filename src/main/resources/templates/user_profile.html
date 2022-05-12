@@ -15,13 +15,16 @@
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand" href="#" >
             <img alt="" th:src="@{'/images/' + ${currUsername} + '.jpg'}" width="50" height="50" class="d-inline-block align-top">
-            <span class="navbar-band mb-0 h3 mx-lg-auto ml-lg-auto" style="color:#e68534;" th:text="${currUsername}"> </span>
+            <span class="navbar-band mb-0 h3 mx-lg-auto ml-lg-auto" style="color:#e68534;" th:text="${currUser.username}"> </span>
         </a>
     </nav>
 
-<!--
+
+
+<!--<p th:text="${submission.exchangeItem}">   </p>
+
     <div class="container text-center">
-        <p th:field="${submission.exchangeItem}">   </p>
+
         <h3 style="color:#e68534;" >Welcome, <span class="username" th:text="${currUsername}" style="color:#e68534;" >Guest</span> </h3>
         <div sec:authorize = "isAuthenticated()"> <span sec:authentication="name" ></span> </div>
             <span class="profile-pic">
