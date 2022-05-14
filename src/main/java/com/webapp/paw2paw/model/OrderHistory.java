@@ -12,19 +12,23 @@ public class OrderHistory {
 
     @Column(name = "OrderItem", length = 20)
     private String orderItem;
-    @Column(name = "CustomerName", length = 20)
-    private String customerName;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "CustomerName")
+    private User user;
     @Column(name = "exchangeItem", length = 30)
     private String exchangeItem;
     @Column(name = "buyerMessage", length = 128)
     private String buyerMessage;
 
-    public OrderHistory(String orderItem, String exchangeItem, String buyerMessage, Long orderId, String customerName) {
+
+
+    public OrderHistory(String orderItem, String exchangeItem, String buyerMessage, Long orderId, User user) {
         this.orderItem = orderItem;
         this.exchangeItem = exchangeItem;
         this.buyerMessage = buyerMessage;
         this.orderId = orderId;
-        this.customerName = customerName;
+        this.user = user;
+
     }
 
 
@@ -48,13 +52,12 @@ public class OrderHistory {
         this.orderId = orderId;
     }
 
-
-    public String getCustomerName() {
-        return customerName;
+    public User getUser() {
+        return user;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getOrderItem() {

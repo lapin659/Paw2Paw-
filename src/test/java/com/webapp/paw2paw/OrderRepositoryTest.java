@@ -1,6 +1,7 @@
 package com.webapp.paw2paw;
 
 import com.webapp.paw2paw.model.OrderHistory;
+import com.webapp.paw2paw.model.User;
 import com.webapp.paw2paw.repository.OrderRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +26,10 @@ public class OrderRepositoryTest {
 
     @Test
     public void testCreateOrder(){
+        User customer = new User();
         OrderHistory orderHistory = new OrderHistory();
         orderHistory.setOrderItem("dogleash");
-        orderHistory.setCustomerName("customer1");
+        orderHistory.setUser(customer);
         orderHistory.setBuyerMessage("hello");
         orderHistory.setExchangeItem("item1");
 

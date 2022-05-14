@@ -1,6 +1,7 @@
 package com.webapp.paw2paw.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -14,6 +15,16 @@ public class User {
     private String password;
     @Column(unique = true, length = 28)
     private String email;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<OrderHistory> orders;
+
+    public List<OrderHistory> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<OrderHistory> orders) {
+        this.orders = orders;
+    }
 
     public Long getId() {
         return id;

@@ -1,9 +1,15 @@
 package com.webapp.paw2paw.service;
 
+import com.webapp.paw2paw.model.OrderHistory;
+import com.webapp.paw2paw.model.User;
+import com.webapp.paw2paw.repository.OrderRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
-public class BuyService {
+public class OrderService {
     /**
     public List<Product> getAllProducts(){
         List<Product> listOfProducts = new ArrayList<>();
@@ -24,6 +30,19 @@ public class BuyService {
     }
 
 **/
+    @Autowired
+    private OrderRepository orderRepository;
+    public void addOrder(OrderHistory orderHistory, User user){
+        orderHistory.setUser(user);
+        orderRepository.save(orderHistory);
+    }
+
+    public List<OrderHistory> findUserOrder(User user){
+        return orderRepository.findByUser(user);
+    }
+
+
+
 
 
 
