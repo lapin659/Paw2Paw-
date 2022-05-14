@@ -1,7 +1,6 @@
 package com.webapp.paw2paw.model;
 
 import javax.persistence.*;
-
 @Entity
 @Table(name="products")
 public class Product {

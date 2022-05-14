@@ -1,19 +1,30 @@
 package com.webapp.paw2paw.model;
 
-import org.springframework.stereotype.Component;
+import javax.persistence.*;
 
-@Component
+@Entity
+@Table(name = "orderHistory")
 public class OrderHistory {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID", length = 10)
+    private Long orderId;
 
-
+    @Column(name = "OrderItem", length = 20)
     private String orderItem;
+    @Column(name = "CustomerName", length = 20)
+    private String customerName;
+    @Column(name = "exchangeItem", length = 30)
     private String exchangeItem;
+    @Column(name = "buyerMessage", length = 128)
     private String buyerMessage;
 
-    public OrderHistory(String orderItem, String exchangeItem, String buyerMessage) {
+    public OrderHistory(String orderItem, String exchangeItem, String buyerMessage, Long orderId, String customerName) {
         this.orderItem = orderItem;
         this.exchangeItem = exchangeItem;
         this.buyerMessage = buyerMessage;
+        this.orderId = orderId;
+        this.customerName = customerName;
     }
 
 
@@ -26,12 +37,25 @@ public class OrderHistory {
         this.orderItem = orderItem;
     }
 
-
-
     public OrderHistory(){
 
     }
+    public Long getOrderId() {
+        return orderId;
+    }
 
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
+    }
+
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
 
     public String getOrderItem() {
         return orderItem;
