@@ -14,7 +14,7 @@ public class registerController {
     @Autowired
     private UserRepository repo;
 
-    @GetMapping("/register")
+    @GetMapping({"/register","register.html"})
     public String showRegister(Model model){
         model.addAttribute("user", new User());
         return "register";

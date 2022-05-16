@@ -16,7 +16,7 @@ public class ProductService {
 
         return listOfProducts;
     }
-    public Product getProductById(String productId) {
+    public  Product getProductById(String productId) {
 
         Predicate<Product> byId = p -> p.getProductId().equals(productId);
         return filterProducts(byId);
@@ -26,7 +26,15 @@ public class ProductService {
         return getAllProducts().stream().filter(strategy).findFirst().orElse(null);
     }
 
+    /**
+    @Autowired
+    private ProductRepository productRepository;
 
+    public void saveProduct(Product product){
+        productRepository.save(product);
+    }
+
+**/
 
 
 

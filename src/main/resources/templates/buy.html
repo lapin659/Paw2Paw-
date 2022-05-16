@@ -17,11 +17,12 @@
 
 </div>
 <div xmlns:th="http://www.thymeleaf.org">
-   <form th:action="@{/save_buy}" th:object="${submission}" method="post">
+   <form th:action="@{/buy}" th:object="${currOrder}" method="post">
        <div class="card-body">
            <tr>
                <td>
-                   <h5 class="card-title" th:text="${buy.productName}"  >Product name</h5>
+                   <h5 class="card-title" style="color:#e68534;" th:text="${buy.productName}"  > Product name</h5>
+                   <div th:text="*{orderItem}"></div>
                    <h5 class="card-title"  th:field="*{exchangeItem}" ></h5>
                </td>
                <td>

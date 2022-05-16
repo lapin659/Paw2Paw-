@@ -18,9 +18,10 @@
 </div>
 <div xmlns:th="http://www.thymeleaf.org">
 
-   <form  th:action="@{/save_exchange}" th:object="${exchange}" method="post">
+   <form  th:action="@{/exchange}" th:object="${exchangeOrder}" method="post">
+       <br/>
     <div class="form-group row">
-        <label th:text= "${exchange.productName}">Email</label>
+        <label th:text= "${exchange.productName}" style="color:#e68534;"> </label>
         <br/>
             <legend class="col-form-label col-sm-2 pt-0">Select item to exchange with</legend>
             <div class="col-sm-10">
@@ -38,10 +39,10 @@
                 <br/>
                 <label th:text = "'Message  '+ ${exchange.seller}" >  </label>
                 <br/>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"  ></textarea>
+                <textarea class="form-control" id="exchangeMessage" rows="3" th:text="*{buyerMessage}" ></textarea>
          </div>
     </div>
-        <button type="submit" class="btn btn-warning text-center"> Confirm Exchange</button>
+        <button type="submit" class="btn btn-warning text-center" th:href="@{/exchange_saved/{productId}(productId = ${exchange.productId})}"> Confirm Exchange</button>
    </form>
 </div>
 

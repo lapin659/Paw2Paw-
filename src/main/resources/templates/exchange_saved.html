@@ -26,13 +26,16 @@
 
 
     <div class="card border-success mb-3" style="max-width: 18rem;">
-        <div class="card-header bg-transparent border-success" >Order Confirmation</div>
+        <div class="card-header bg-transparent border-success" >Exchange Confirmation</div>
        <div class="card-body">
 
            <tr>
                <td>
-                     <div th:text="${buyOrder.orderItem}"></div>
-                   <h5 class="card-title" th:text= "${buyItem}">Product name</h5>
+
+                     <div th:text="${exchangedOrder.exchangeItem}"></div>
+                   <!--
+                   <h5 class="card-title" th:text= "${exchange.productName}">Exchange product name</h5>
+-->
                </td>
 
            </tr>
@@ -41,7 +44,7 @@
                 <br/>
                 <br/>
         <p class="card-text">Your Message to the seller: </p>
-                <textarea class="form-control" id="buyerMessage" rows="3" th:text="${buyOrder.buyerMessage}"  ></textarea>
+                <textarea class="form-control" id="buyerMessage" rows="3" th:text="${exchangedOrder.buyerMessage}"  ></textarea>
 
     </div>
 </div>

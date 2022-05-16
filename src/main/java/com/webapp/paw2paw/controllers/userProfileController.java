@@ -3,14 +3,15 @@ package com.webapp.paw2paw.controllers;
 import com.webapp.paw2paw.model.OrderHistory;
 import com.webapp.paw2paw.model.User;
 import com.webapp.paw2paw.repository.UserRepository;
+import com.webapp.paw2paw.service.OrderService;
 import com.webapp.paw2paw.service.UserProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
 @Controller
@@ -19,7 +20,10 @@ public class userProfileController {
     @Autowired
     private UserRepository userRepos;
 
-    @GetMapping("/login")
+    @Autowired
+    private OrderService orderService;
+
+    @GetMapping({"/login", "login.html"})
     public String showLogin(){
 
         return "login";
@@ -34,8 +38,12 @@ public class userProfileController {
         String currUser = principal.getName();
         model.addAttribute("currUsername", currUser);
         User curr = userRepos.findByEmail(currUser);
-       // String curr = userRepos.findByEmail(currUser).getUsername();
+       //find order by  user id
+        model.addAttribute("myOrders", orderService.findUserOrder(curr));
+        //return list of orderhistory
         model.addAttribute("currUser", curr);
+        userRepos.save(curr);
+
         return "user_profile";
 
     }
@@ -46,6 +54,20 @@ public class userProfileController {
         return "user_profile";
     }
 
+
+    @PostMapping("/productList")
+    public String showUsername(Principal principal, Model model, HttpServletRequest request){
+        String currUser = principal.getName();
+        model.addAttribute("showUser", currUser);
+        String userEmail = request.getUserPrincipal().getName();
+        User currU = userRepos.findByEmail(userEmail);
+        model.addAttribute("currUser",currU);
+
+        return "productList";
+    }
+
+
+    /**
     @PostMapping("/exchange")
     public String showExchangeHistory(@ModelAttribute OrderHistory orderHistory, Model model){
         String exchangeItem = orderHistory.getExchangeItem();
@@ -57,7 +79,7 @@ public class userProfileController {
 
 
 
-    /**
+
     @PostMapping("/exchange")
     public String exchangeSubmit(@ModelAttribute ("submission") OrderHistory submission){
        // model.addAttribute("submission", submission);

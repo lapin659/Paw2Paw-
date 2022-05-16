@@ -13,15 +13,76 @@
 <body>
 <!--ADD order/exchange history, nav bar, reformat profile photo, display username   -->
     <nav class="navbar navbar-light bg-light">
+
         <a class="navbar-brand" href="#" >
-            <img alt="" th:src="@{'/images/' + ${currUsername} + '.jpg'}" width="50" height="50" class="d-inline-block align-top">
+            <img alt="" th:src="@{'/images/' + ${currUser.username} + '.jpg'}" width="50" height="50" class="d-inline-block align-top">
             <span class="navbar-band mb-0 h3 mx-lg-auto ml-lg-auto" style="color:#e68534;" th:text="${currUser.username}"> </span>
         </a>
+        <a class="navbar-brand" href="homepage.html" style="color:#e68534;">Paw2Paw</a>
+        <a class="navbar-brand" href="productList.html" style="color:#e68534;">Marketplace</a>
     </nav>
 
+<!--
+<div th:object="${myOrders}"  >order history</div>
+-->
+<div class="container">
+    <div class ="row align-items-start">
+        <div class = "col">
+<div class="list-group">
+    <h3 style="color:#e68534;">Order History</h3>
+    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1" style="color:#e68534;">Order 001</h5>
+            <small>3 days ago</small>
+        </div>
+        <p class="mb-1">Order Details</p>
+        <small>Order Status: </small>
+    </a>
+    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1" style="color:#e68534;">Exchange Order 002</h5>
+            <small class="text-muted">5 days ago</small>
+        </div>
+        <p class="mb-1">Exchange order details</p>
+        <small class="text-muted">Order Status: </small>
+    </a>
+    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1"style="color:#e68534;">Exchange order 003</h5>
+            <small class="text-muted">7 days ago</small>
+        </div>
+        <p class="mb-1">Exchange order details</p>
+        <small class="text-muted">Order Status: </small>
+    </a>
+</div>
+</div>
+    </div>
+
+    <div class="col">
+    <div class="list-group">
+        <h3 style="color:#e68534;">Group Message</h3>
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start ">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1" style="color:#e68534;">Thread 001 </h5>
+            <small>3 days ago</small>
+        </div>
+        <p class="mb-1">Message details</p>
+        <small>last replied by User A</small>
+        </a>
+    </div>
+    </div>
 
 
-<!--<p th:text="${submission.exchangeItem}">   </p>
+
+
+
+
+
+
+</div>
+
+<!--
+<p th:text="${submission.exchangeItem}">   </p>
 
     <div class="container text-center">
 

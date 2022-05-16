@@ -42,8 +42,8 @@ public class OrderHistory {
     }
 
     public OrderHistory(){
-
     }
+
     public Long getOrderId() {
         return orderId;
     }
