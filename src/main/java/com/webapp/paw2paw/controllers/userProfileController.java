@@ -1,6 +1,5 @@
 package com.webapp.paw2paw.controllers;
 
-import com.webapp.paw2paw.model.OrderHistory;
 import com.webapp.paw2paw.model.User;
 import com.webapp.paw2paw.repository.UserRepository;
 import com.webapp.paw2paw.service.OrderService;
@@ -47,14 +46,14 @@ public class userProfileController {
         return "user_profile";
 
     }
-
+/**
     @GetMapping("/exchange")
     public String getExchangeHistory(Model model){
         model.addAttribute("submission", new OrderHistory());
         return "user_profile";
     }
 
-
+**/
     @PostMapping("/productList")
     public String showUsername(Principal principal, Model model, HttpServletRequest request){
         String currUser = principal.getName();
@@ -104,8 +103,6 @@ public class userProfileController {
         model.addAttribute("submission", new OrderHistory());
         return "user_profile";
     }
-
-
 
 
 **/

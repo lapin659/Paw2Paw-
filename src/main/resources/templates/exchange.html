@@ -39,10 +39,10 @@
                 <br/>
                 <label th:text = "'Message  '+ ${exchange.seller}" >  </label>
                 <br/>
-                <textarea class="form-control" id="exchangeMessage" rows="3" th:text="*{buyerMessage}" ></textarea>
+                <textarea class="form-control" id="exchangeMessage" rows="3" th:field="*{buyerMessage}" ></textarea>
          </div>
     </div>
-        <button type="submit" class="btn btn-warning text-center" th:href="@{/exchange_saved/{productId}(productId = ${exchange.productId})}"> Confirm Exchange</button>
+        <button type="submit" class="btn btn-warning text-center" > Confirm Exchange</button>
    </form>
 </div>
 

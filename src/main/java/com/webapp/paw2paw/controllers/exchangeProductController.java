@@ -1,8 +1,6 @@
 package com.webapp.paw2paw.controllers;
 
 import com.webapp.paw2paw.model.OrderHistory;
-import com.webapp.paw2paw.model.Product;
-import com.webapp.paw2paw.repository.OrderRepository;
 import com.webapp.paw2paw.repository.UserRepository;
 import com.webapp.paw2paw.service.OrderService;
 import com.webapp.paw2paw.service.ProductService;
@@ -18,31 +16,40 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.HttpSession;
 
 @Controller
-
 public class exchangeProductController {
 
     @Autowired
     private ProductService prodService;
-
-
     @Autowired
     private OrderService odrService;
-    @Autowired
-    private OrderRepository orderRepos;
+
     @Autowired
     private UserRepository usrRepo;
+/**
+    @PostMapping("/save_exchange")
+    public String exSubmit(Model model,@ModelAttribute ("sub") OrderHistory savedExchange){
 
-    @GetMapping({"/exchange/{productId}"})
-    public String exchangeProduct(Model model, @PathVariable("productId") String productId){
+        model.addAttribute("exchItem", savedExchange.getOrderItem());
+        model.addAttribute("exchMessage",savedExchange.getBuyerMessage());
+        model.addAttribute("currExchange", odrService);
+
+        return "exchange_saved";
+    }**/
+
+    @GetMapping({"/exchange/{productId}","/exchange"})
+    public String exchangeProduct(Model model, @PathVariable("productId") String productId, String exchangeEmail, HttpSession sess){
         model.addAttribute("exchange", prodService.getProductById(productId));
         String exchangeProduct = prodService.getProductById(productId).getProductName();
+
         OrderHistory exchangeHistory = new OrderHistory();
         exchangeHistory.setOrderItem(exchangeProduct);
-        orderRepos.save(exchangeHistory);
-        model.addAttribute("exchangeOrder", exchangeHistory);
-       return "exchange";
-    }
 
+       // orderRepos.save(exchangeHistory);
+        model.addAttribute("exchangeOrder", exchangeHistory);
+        sess.setAttribute("ExchangeEmail",exchangeEmail);
+          return "exchange";
+    }
+         /**
     @GetMapping("/exchange_saved/{productId}")
     public String showExchanged(@PathVariable("productId") String productId, Model model){
         Product exchange = prodService.getProductById(productId);
@@ -51,24 +58,15 @@ public class exchangeProductController {
 
     }
 
+          **/
 
-/**
-    @PostMapping("/save_exchange")
-    public String exchangeSubmit(Model model,@ModelAttribute ("sub") OrderHistory savedExchange){
 
-        model.addAttribute("exchItem", savedExchange.getOrderItem());
-        model.addAttribute("exchMessage",savedExchange.getBuyerMessage());
-        model.addAttribute("currExchange", odrService);
 
-        return "exchange_saved";
-    }
-
-**/
     @PostMapping( "/exchange")
-    public String addExchangeOrder(@ModelAttribute OrderHistory exchangedHistory, Model model, BindingResult bindingResult, HttpSession session){
+    public String addExchangeOrder(@ModelAttribute("exchangedOrder") OrderHistory exchangedHistory, BindingResult bindingResult, HttpSession session){
         String exchangerEmail = (String) session.getAttribute("exchEmail");
         odrService.addOrder(exchangedHistory, usrRepo.findByEmail(exchangerEmail));
-        model.addAttribute("exchangedOrder", exchangedHistory);
+        //model.addAttribute("exchangedOrder", exchangedHistory);
 
         return "exchange_saved";
 

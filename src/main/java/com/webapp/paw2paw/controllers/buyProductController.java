@@ -73,6 +73,7 @@ public class buyProductController {
         model.addAttribute("buy", productService.getProductById(productId));
        // productService.saveProduct(productService.getProductById(productId));
         String orderProduct = productService.getProductById(productId).getProductName();
+
         OrderHistory orderHistory = new OrderHistory();
         orderHistory.setOrderItem(orderProduct);
 
