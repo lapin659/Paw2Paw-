@@ -1,6 +1,7 @@
 package com.webapp.paw2paw.controllers;
 
 import com.webapp.paw2paw.model.OrderHistory;
+import com.webapp.paw2paw.model.User;
 import com.webapp.paw2paw.repository.UserRepository;
 import com.webapp.paw2paw.service.OrderService;
 import com.webapp.paw2paw.service.ProductService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 
 @Controller
 public class exchangeProductController {
@@ -71,6 +73,23 @@ public class exchangeProductController {
         return "exchange_saved";
 
     }
+
+
+
+
+    @PostMapping({"/exchange_saved","user_profile"})
+    public String showExchangeHistory(@ModelAttribute OrderHistory orderHistory, Model model, Principal principal){
+        String exchangeItem = orderHistory.getExchangeItem();
+        model.addAttribute("exchangeItem", exchangeItem);
+        User u = new User();
+        u.setUsername("a");
+        u.setEmail("b");
+        model.addAttribute("currU", u);
+
+
+        return "user_profile";
+    }
+
 
 
 

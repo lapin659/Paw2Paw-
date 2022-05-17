@@ -60,14 +60,7 @@ public class buyProductController {
         return "buy_saved";
     }
 
-    /**
-    @PostMapping("/exchange")
-    public String exchangeSubmit(@ModelAttribute OrderHistory submission, Model model){
-        model.addAttribute("submission", submission);
-        return "exchange"; //has to be exchange to call submission in template exchange.html
-    }
 
-**/
     @GetMapping("/buy/{productId}")
     public String orderProduct(Model model, @PathVariable("productId") String productId, String buyerEmail, HttpSession session) {
         model.addAttribute("buy", productService.getProductById(productId));
@@ -93,6 +86,11 @@ public class buyProductController {
         return "buy_saved";
 
     }
+
+
+
+
+
 
 
 

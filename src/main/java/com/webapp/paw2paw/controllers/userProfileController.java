@@ -1,13 +1,16 @@
 package com.webapp.paw2paw.controllers;
 
+import com.webapp.paw2paw.model.OrderHistory;
 import com.webapp.paw2paw.model.User;
 import com.webapp.paw2paw.repository.UserRepository;
 import com.webapp.paw2paw.service.OrderService;
 import com.webapp.paw2paw.service.UserProfileService;
+import io.micrometer.core.lang.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,18 +35,23 @@ public class userProfileController {
 
     @GetMapping(value = {"/","/user_profile"})
     //@ResponseBody
+    @Nullable
     public String userProfile(Principal principal, Model model){
+        if(!principal.getName().isEmpty()) {
+            String currUser = principal.getName();
+            model.addAttribute("currUsername", currUser);
+            User curr = userRepos.findByEmail(currUser);
+            //find order by  user id
+            model.addAttribute("myOrders", orderService.findUserOrder(curr));
+            //return list of orderhistory
+            model.addAttribute("currUser", curr);
+            userRepos.save(curr);
+        }else {
+            model.addAttribute("cru", new User());
+        }
 
-        String currUser = principal.getName();
-        model.addAttribute("currUsername", currUser);
-        User curr = userRepos.findByEmail(currUser);
-       //find order by  user id
-        model.addAttribute("myOrders", orderService.findUserOrder(curr));
-        //return list of orderhistory
-        model.addAttribute("currUser", curr);
-        userRepos.save(curr);
+            return "user_profile";
 
-        return "user_profile";
 
     }
 /**
@@ -56,27 +64,36 @@ public class userProfileController {
 **/
     @PostMapping("/productList")
     public String showUsername(Principal principal, Model model, HttpServletRequest request){
-        String currUser = principal.getName();
-        model.addAttribute("showUser", currUser);
-        String userEmail = request.getUserPrincipal().getName();
-        User currU = userRepos.findByEmail(userEmail);
-        model.addAttribute("currUser",currU);
+        if(!principal.getName().isEmpty()) {
+            String currUser = principal.getName();
+            model.addAttribute("showUser", currUser);
+            String userEmail = request.getUserPrincipal().getName();
+            User currU = userRepos.findByEmail(userEmail);
+            model.addAttribute("currUser", currU);
+        }
+        else{
+            model.addAttribute("cu", new User());
 
+        }
         return "productList";
     }
 
 
-    /**
-    @PostMapping("/exchange")
-    public String showExchangeHistory(@ModelAttribute OrderHistory orderHistory, Model model){
+
+    @PostMapping("/exchange_saved")
+    public String showExchangeHistory(@ModelAttribute OrderHistory orderHistory, Model model, Principal principal, User user){
         String exchangeItem = orderHistory.getExchangeItem();
         model.addAttribute("exchangeItem", exchangeItem);
+        String currEmail = principal.getName();
+        model.addAttribute("currUser", user);
+        //model.addAttribute("currU", new User());
+
         return "user_profile";
     }
 
 
 
-
+    /**
 
 
     @PostMapping("/exchange")

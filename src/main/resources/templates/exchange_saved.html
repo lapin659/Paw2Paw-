@@ -18,10 +18,11 @@
 </div>
 
 <div xmlns:th="http://www.thymeleaf.org">
+    <form th:action="@{/user_profile}" th:object="${exchangedOrder}" method="post">
     <nav class="navbar navbar-light bg-light">
 
         <a class="navbar-brand" href="homepage.html" style="color:#e68534;">Paw2Paw</a>
-        <a class="navbar-brand" href="user_profile.html" style="color:#e68534;">My Account</a>
+        <a class="navbar-brand" th:href="@{/user_profile}" style="color:#e68534;">My Account</a>
     </nav>
 
 
@@ -48,6 +49,7 @@
                 <textarea class="form-control" id="buyerMessage" rows="3" th:text="${exchangedOrder.buyerMessage}"  ></textarea>
 
     </div>
+    </form>
 </div>
 </body>
 </html>
