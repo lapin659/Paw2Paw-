@@ -8,6 +8,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "userId", unique = true, length = 30)
     private Long id;
     @Column(name = "username", unique = true, length = 20)
     private String username;

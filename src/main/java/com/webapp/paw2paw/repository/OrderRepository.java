@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 public interface OrderRepository extends JpaRepository<OrderHistory, Long> {
-    @Query("SELECT o FROM OrderHistory o WHERE o.orderItem = ?1")
+    @Query("SELECT o FROM OrderHistory o WHERE o.orderId = ?2")
     OrderHistory findByProductName(String orderName);
 
     List<OrderHistory> findByUser(User user);

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 
@@ -83,6 +84,12 @@ public class buyProductController {
         String customerEmail = (String) session.getAttribute("currEmail");
         orderService.addOrder(buyOrder, userRepo.findByEmail(customerEmail));
         model.addAttribute("buyOrder", buyOrder);
+
+
+        List<OrderHistory> Orders = orderService.getAllOrders();
+        model.addAttribute("orders", Orders);
+
+
         return "buy_saved";
 
     }

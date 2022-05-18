@@ -32,7 +32,8 @@
            <tr>
                <td>
                      <div th:text="${buyOrder.orderItem}"></div>
-                   <h5 class="card-title" th:text= "${buyItem}">Product name</h5>
+                   <h5 class="card-title" th:text= "${orders[0].orderItem}">Product name</h5>
+                   <div th:text=" '$' + ${orders[0].orderPrice}"></div>
                </td>
 
            </tr>

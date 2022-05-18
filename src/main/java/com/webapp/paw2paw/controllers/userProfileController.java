@@ -21,7 +21,6 @@ public class userProfileController {
     private UserProfileService userProfileService;
     @Autowired
     private UserRepository userRepos;
-
     @Autowired
     private OrderService orderService;
 
@@ -36,7 +35,8 @@ public class userProfileController {
     @GetMapping(value = {"/","/user_profile"})
     //@ResponseBody
     @Nullable
-    public String userProfile(Principal principal, Model model){
+    public String userProfile(Principal principal, Model model, HttpServletRequest request){
+       // User customer = getAuthenticatedCustomer(request);
         if(!principal.getName().isEmpty()) {
             String currUser = principal.getName();
             model.addAttribute("currUsername", currUser);
@@ -48,6 +48,7 @@ public class userProfileController {
             userRepos.save(curr);
         }else {
             model.addAttribute("cru", new User());
+
         }
 
             return "user_profile";
@@ -87,6 +88,7 @@ public class userProfileController {
         String currEmail = principal.getName();
         model.addAttribute("currUser", user);
         //model.addAttribute("currU", new User());
+
 
         return "user_profile";
     }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class exchangeProductController {
@@ -42,13 +43,21 @@ public class exchangeProductController {
     public String exchangeProduct(Model model, @PathVariable("productId") String productId, String exchangeEmail, HttpSession sess){
         model.addAttribute("exchange", prodService.getProductById(productId));
         String exchangeProduct = prodService.getProductById(productId).getProductName();
+        model.addAttribute("exchangeProduct", exchangeProduct);
+        List<OrderHistory> allOrders = odrService.getAllOrders();
+        OrderHistory exchangeHistory = odrService.getOrderByName(exchangeProduct);
 
+
+        //add product info into new orderhistory object
+        //pass to post "saved" page
+        /**
         OrderHistory exchangeHistory = new OrderHistory();
-        exchangeHistory.setOrderItem(exchangeProduct);
-
+        exchangeHistory.getOrderedProduct(productId);
+        model.addAttribute("productId", productId);
+         **/
        // orderRepos.save(exchangeHistory);
         model.addAttribute("exchangeOrder", exchangeHistory);
-        sess.setAttribute("ExchangeEmail",exchangeEmail);
+      //  sess.setAttribute("ExchangeEmail",exchangeEmail);
           return "exchange";
     }
          /**
@@ -65,9 +74,14 @@ public class exchangeProductController {
 
 
     @PostMapping( "/exchange")
-    public String addExchangeOrder(@ModelAttribute("exchangedOrder") OrderHistory exchangedHistory, BindingResult bindingResult, HttpSession session){
+    public String addExchangeOrder(@ModelAttribute("exchangeOrder") OrderHistory exchangeHistory,
+                                   @ModelAttribute("exchangeProduct") String exchangeProduct ,
+                                   BindingResult bindingResult, HttpSession session, Model model){
         String exchangerEmail = (String) session.getAttribute("exchEmail");
-        odrService.addOrder(exchangedHistory, usrRepo.findByEmail(exchangerEmail));
+        List<OrderHistory> Orders = odrService.getAllOrders();
+        model.addAttribute("orders", Orders);
+
+        odrService.addOrder(exchangeHistory, usrRepo.findByEmail(exchangerEmail));
         //model.addAttribute("exchangedOrder", exchangedHistory);
 
         return "exchange_saved";

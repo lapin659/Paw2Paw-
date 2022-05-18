@@ -17,9 +17,9 @@ public class OrderService {
         List<OrderHistory> listOfOrders = new ArrayList<>();
         long tempId = 12345;
         User tempUser =  new User();
-        listOfOrders.add(new OrderHistory("Cat bed", "for canned food sampler", " ",tempId , tempUser));
-        listOfOrders.add(new OrderHistory("Dog leash", "for dog toy", " ", tempId, tempUser));
-        listOfOrders.add(new OrderHistory("1-hr dog walk", "for 2-day cat sitting", " ", tempId, tempUser));
+        listOfOrders.add(new OrderHistory("Cat bed", "for canned food sampler", " ",tempId , tempUser,15));
+        listOfOrders.add(new OrderHistory("Dog leash", "for dog toy", " ", tempId, tempUser,10));
+        listOfOrders.add(new OrderHistory("1-hr dog walk", "for 2-day cat sitting", " ", tempId, tempUser,20));
 
         return listOfOrders;
     }

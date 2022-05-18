@@ -18,12 +18,11 @@
 </div>
 
 <div xmlns:th="http://www.thymeleaf.org">
-    <form th:action="@{/user_profile}" th:object="${exchangedOrder}" method="post">
-    <nav class="navbar navbar-light bg-light">
-
-        <a class="navbar-brand" href="homepage.html" style="color:#e68534;">Paw2Paw</a>
-        <a class="navbar-brand" th:href="@{/user_profile}" style="color:#e68534;">My Account</a>
-    </nav>
+    <form th:action="@{/user_profile}" th:object="${exchangeOrder}" method="post">
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="homepage.html" style="color:#e68534;">Paw2Paw</a>
+            <a class="navbar-brand" th:href="@{/user_profile}" style="color:#e68534;">My Account</a>
+        </nav>
 
 
     <div class="card border-success mb-3" style="max-width: 18rem;">
@@ -32,12 +31,13 @@
 
            <tr>
                <td>
+                   <div th:text="${orders[1].orderItem}"></div>
+                   <div th:text="${orders[1].exchangeItem}"></div>
+                   <!--                <div th:text="${exchangeOrder.orderItem}"> item name</div>
 
-                     <div th:text="${exchangedOrder.exchangeItem}"></div>
 
-                   <!--
-                   <h5 class="card-title" th:text= "${exchange.productName}">Exchange product name</h5>
--->
+                                                      <h5 class="card-title" th:text= "${exchange.productName}">Exchange product name</h5>
+                                   -->
                </td>
 
            </tr>
@@ -46,7 +46,7 @@
                 <br/>
                 <br/>
         <p class="card-text">Your Message to the seller: </p>
-                <textarea class="form-control" id="buyerMessage" rows="3" th:text="${exchangedOrder.buyerMessage}"  ></textarea>
+                <textarea class="form-control" id="buyerMessage" rows="3" th:text="${exchangeOrder.buyerMessage}"  ></textarea>
 
     </div>
     </form>

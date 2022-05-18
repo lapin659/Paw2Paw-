@@ -1,5 +1,7 @@
 package com.webapp.paw2paw.model;
 
+import com.webapp.paw2paw.service.ProductService;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,6 +14,12 @@ public class OrderHistory {
 
     @Column(name = "OrderItem", length = 20)
     private String orderItem;
+
+    @Column(name = "OrderPrice", length = 10)
+    private double orderPrice;
+
+
+
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "CustomerName")
     private User user;
@@ -22,12 +30,14 @@ public class OrderHistory {
 
 
 
-    public OrderHistory(String orderItem, String exchangeItem, String buyerMessage, Long orderId, User user) {
+    public OrderHistory(String orderItem, String exchangeItem, String buyerMessage, Long orderId, User user, double orderPrice) {
         this.orderItem = orderItem;
         this.exchangeItem = exchangeItem;
         this.buyerMessage = buyerMessage;
         this.orderId = orderId;
         this.user = user;
+        this.orderPrice = orderPrice;
+
 
     }
 
@@ -83,7 +93,19 @@ public class OrderHistory {
     public void setBuyerMessage(String buyerMessage) {
         this.buyerMessage = buyerMessage;
     }
-
+    public double getOrderPrice() {
+        return orderPrice;
+    }
+    public void setOrderPrice(double orderPrice) {
+        this.orderPrice = orderPrice;
+    }
+    public OrderHistory getOrderedProduct(String productId){
+       // String prodName = "";
+        ProductService productService = new ProductService();
+        OrderHistory currOrderHistory = new OrderHistory();
+        currOrderHistory.setOrderItem(productId);
+        return currOrderHistory;
+    }
 
 
 

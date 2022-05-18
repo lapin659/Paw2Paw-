@@ -32,6 +32,7 @@ public class OrderRepositoryTest {
         orderHistory.setUser(customer);
         orderHistory.setBuyerMessage("hello");
         orderHistory.setExchangeItem("item1");
+        orderHistory.setOrderPrice(10);
 
         OrderHistory savedOrder = orderRepo.save(orderHistory);
         OrderHistory existOrder = entityManager.find(OrderHistory.class, savedOrder.getOrderId());
