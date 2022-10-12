@@ -1,12 +1,16 @@
 package com.webapp.paw2paw.controllers;
 
 import com.webapp.paw2paw.model.OrderHistory;
+import com.webapp.paw2paw.model.User;
+import com.webapp.paw2paw.model.UserProfile;
 import com.webapp.paw2paw.repository.OrderRepository;
 import com.webapp.paw2paw.repository.UserRepository;
 import com.webapp.paw2paw.service.OrderService;
 import com.webapp.paw2paw.service.ProductService;
 import com.webapp.paw2paw.service.UserProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -32,6 +37,8 @@ public class buyProductController {
     private UserProfileService userProfile;
     @Autowired
     private UserRepository userRepo;
+
+  private UserProfile userPro;
 
 /**
     @GetMapping("/buy/{productId}")
@@ -63,18 +70,26 @@ public class buyProductController {
 
 
     @GetMapping("/buy/{productId}")
-    public String orderProduct(Model model, @PathVariable("productId") String productId, String buyerEmail, HttpSession session) {
+    public String orderProduct(Model model, @PathVariable("productId") String productId,
+                               String buyerEmail, HttpSession session,
+                               Principal principal) {
+
         model.addAttribute("buy", productService.getProductById(productId));
        // productService.saveProduct(productService.getProductById(productId));
         String orderProduct = productService.getProductById(productId).getProductName();
 
         OrderHistory orderHistory = new OrderHistory();
         orderHistory.setOrderItem(orderProduct);
-
+        //model.addAttribute("loggedUser", u);
 
         model.addAttribute("currOrder", orderHistory);
       //  model.addAttribute("currOrders", orderService);
         session.setAttribute("currEmail", buyerEmail);
+/**
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+       String currUser = authentication.getName();
+        model.addAttribute("loggedUser", currUser);
+**/
         return "buy";
 
     }
@@ -86,6 +101,14 @@ public class buyProductController {
         model.addAttribute("buyOrder", buyOrder);
 
 
+
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currUser = authentication.getName();
+        model.addAttribute("loggedUser", currUser);
+
+        User customer = userRepo.findByEmail(currUser);
+        orderService.addOrder(buyOrder,customer);
         List<OrderHistory> Orders = orderService.getAllOrders();
         model.addAttribute("orders", Orders);
 

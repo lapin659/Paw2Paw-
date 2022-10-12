@@ -14,6 +14,19 @@ public class User {
     private String username;
     @Column(length = 64)
     private String password;
+
+    public User(Long id, String username, String password, String email, List<OrderHistory> orders) {
+
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.orders = orders;
+    }
+
+    public User() {
+    }
+
     @Column(unique = true, length = 28)
     private String email;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

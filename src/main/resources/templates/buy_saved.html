@@ -20,7 +20,8 @@
     <nav class="navbar navbar-light bg-light">
 
         <a class="navbar-brand" href="homepage.html" style="color:#e68534;">Paw2Paw</a>
-        <a class="navbar-brand" href="user_profile.html" style="color:#e68534;">My Account</a>
+        <a class="navbar-brand" th:href="@{/user_profile}" style="color:#e68534;">My Account</a>
+        <a class="navbar-brand disabled" th:text="${loggedUser}" style="color:#e68534;"  ></a>
     </nav>
 
 
@@ -34,6 +35,8 @@
                      <div th:text="${buyOrder.orderItem}"></div>
                    <h5 class="card-title" th:text= "${orders[0].orderItem}">Product name</h5>
                    <div th:text=" '$' + ${orders[0].orderPrice}"></div>
+                   <div th:text="${buyOrder.orderItem}"></div>
+
                </td>
 
            </tr>

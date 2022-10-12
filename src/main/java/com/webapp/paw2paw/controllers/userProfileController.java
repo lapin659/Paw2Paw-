@@ -77,11 +77,18 @@ public class userProfileController {
 
         }
         return "productList";
+
+    }
+
+
+    @GetMapping("/exchange_saved")
+    public String exchangedFragment(){
+        return "user_profile";
     }
 
 
 
-    @PostMapping("/exchange_saved")
+    @PostMapping({"/exchange_saved", "/buy_saved"})
     public String showExchangeHistory(@ModelAttribute OrderHistory orderHistory, Model model, Principal principal, User user){
         String exchangeItem = orderHistory.getExchangeItem();
         model.addAttribute("exchangeItem", exchangeItem);
@@ -92,6 +99,25 @@ public class userProfileController {
 
         return "user_profile";
     }
+
+
+    @PostMapping("/buy_saved")
+    public String showBuyHistory(@ModelAttribute OrderHistory orderHistory, Model model, Principal principal, User user){
+        String buyItem = orderHistory.getOrderItem();
+        model.addAttribute("buyItem", buyItem);
+        String currEmail = principal.getName();
+        model.addAttribute("currUser", user);
+        //model.addAttribute("currU", new User());
+
+
+        return "user_profile";
+    }
+
+
+
+
+
+
 
 
 

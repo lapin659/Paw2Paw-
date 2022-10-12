@@ -32,10 +32,10 @@
         <div class = "col">
 <div class="list-group">
     <h3 style="color:#e68534;">Order History</h3>
-    <form th:action="@{/order}" >
+    <form th:action="@{/order}" th:object="${myOrders}">
     <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1" style="color:#e68534;" th:utext="${exchangeItem}">Order 001</h5>
+            <h5 class="mb-1" style="color:#e68534;"  >Order 001</h5>
             <small>3 days ago</small>
         </div>
         <p class="mb-1">Order Details</p>
@@ -43,7 +43,7 @@
     </a>
     <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1" style="color:#e68534;">Exchange Order 002</h5>
+            <h5 class="mb-1" style="color:#e68534;" >Exchange Order 002</h5>
             <small class="text-muted">5 days ago</small>
         </div>
         <p class="mb-1">Exchange order details</p>

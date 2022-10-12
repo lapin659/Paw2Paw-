@@ -80,7 +80,6 @@ public class exchangeProductController {
         String exchangerEmail = (String) session.getAttribute("exchEmail");
         List<OrderHistory> Orders = odrService.getAllOrders();
         model.addAttribute("orders", Orders);
-
         odrService.addOrder(exchangeHistory, usrRepo.findByEmail(exchangerEmail));
         //model.addAttribute("exchangedOrder", exchangedHistory);
 

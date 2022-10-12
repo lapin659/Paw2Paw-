@@ -99,8 +99,10 @@ public class OrderHistory {
     public void setOrderPrice(double orderPrice) {
         this.orderPrice = orderPrice;
     }
+
+
+
     public OrderHistory getOrderedProduct(String productId){
-       // String prodName = "";
         ProductService productService = new ProductService();
         OrderHistory currOrderHistory = new OrderHistory();
         currOrderHistory.setOrderItem(productId);

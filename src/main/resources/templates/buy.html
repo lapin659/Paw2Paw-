@@ -25,9 +25,11 @@
                   <!--
                    <div th:text="*{orderItem}"></div>
                    <h5 class="card-title"  th:field="*{exchangeItem}" ></h5>
-                   -->
+
+                   <div th:text="${loggedUser}"></div>-->
                </td>
                <td>
+                   <div th:text="${session.currEmail}"></div>
                    <p class="card-text" th:text = " '$' + ${buy.price}"></p>
                </td>
            </tr>
