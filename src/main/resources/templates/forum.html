@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/online" lang="">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="~{layout.html}" lang="">
 <head>
   <title>Community</title>
     <link th:rel="stylesheet" th:href="@{assets/bootstrap-slider/css/bootstrap-slider.css}"/>
@@ -36,5 +36,24 @@
               </div>
           </div>
       </nav>
+
+      <article class="container" style="padding: 3% 0 2%;">
+      <section class="row">
+          <div class="col s12">
+              <table class="striped bordered centered">
+                  <thead>
+                  <tr>
+                      <th>Answers</th>
+                      <th>Title</th>
+                      <th>Author</th>
+                      <th>Created</th>
+                      <th>Enter</th>
+                  </tr>
+                  </thead>
+              </table>
+          </div>
+      </section>
+      </article>
+
 </body>
 </html>
