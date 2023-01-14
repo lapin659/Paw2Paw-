@@ -50,6 +50,18 @@
                       <th>Enter</th>
                   </tr>
                   </thead>
+                  <tbody>
+
+                    <div th:each="topic, stat: ${topics}">
+                        <tr>
+                            <td th:text= "${topic.title}">Topic's title</td>
+
+
+                        </tr>
+                    </div>
+                  </tbody>
+
+
               </table>
           </div>
       </section>

@@ -15,7 +15,7 @@ public class ForumTopic {
     @GeneratedValue
     private Long topicId;
 
-    @Column(nullable = false, length = 32)
+    @Column(unique = true, length = 32)
     private String title;
 
     @Column(nullable = false, length = 1024)
@@ -23,15 +23,33 @@ public class ForumTopic {
 
     private LocalDateTime timeStamp;
 
-    @Column(length = 1024)
-    private String code;
-
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
 
     @OneToMany(mappedBy = "topic")
     private List<Reply> replies;
+
+    public ForumTopic() {
+
+    }
+
+    public ForumTopic(Long topicId, String title, String content, LocalDateTime timeStamp, User user, List<Reply> replies) {
+        super();
+        this.topicId = topicId;
+        this.title = title;
+        this.content = content;
+        this.timeStamp = timeStamp;
+        this.user = user;
+        this.replies = replies;
+    }
+
+
+    public ForumTopic(Long topicId, String title, User user) {
+        this.topicId = topicId;
+        this.title = title;
+        this.user = user;
+    }
 
     public Long getId() {
         return topicId;
@@ -56,7 +74,6 @@ public class ForumTopic {
     public void setContent(String content) {
         this.content = content;
     }
-
 
     public LocalDateTime getTimeStamp() {
         return timeStamp;
