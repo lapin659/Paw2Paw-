@@ -50,44 +50,49 @@
                   </tr>
                   </thead>
                   <tbody>
+                  <div class="row" xmlns:th="http://www.thymeleaf.org">
+                      <div th:each="listedtopic, stat:${listedtopics}">
                     <tr>
                         <th scope="row"> 1</th>
-                        <td>Topic Title 1</td>
+                        <td th:text= "${listedtopic.title}"></td>
                         <td>UserA</td>
                         <td>Timestamp 1</td>
                         <td><button type="button" class = "btn btn-outline-warning">Thread</button>
                       </td>
 
                     </tr>
+                      </div>
+                  </div>
 
                   </tbody>
                   </table>
 
-                  <div class="row" xmlns:th="http://www.thymeleaf.org">
-                  <!-- <div th:each="topic, stat: ${topics}">
-                  -->
+      <!--  <div class="row" xmlns:th="http://www.thymeleaf.org">
+
+
 
                   <div th:each="listedtopic, stat:${listedtopics}">
 
                     <tr>
-
+                        -->
                         <!--    <td th:text= "${topic.title}">Topic's title</td>
                      <th scope="row" >Topic Title</th>
                      -->
 
+      <!--
+                            <td>
+                                <p th:text= "${listedtopic.title}"></p>
+                                <p th:text= "${listedtopic.id}">T</p>
 
-                        <td>
-                            <p th:text= "${listedtopic.title}"></p>
-                            <p th:text= "${listedtopic.id}">T</p>
-                            <!--
-                     <p th:text= "${listedtopic.user.username}">Topic Title</p>
-                     -->
+                         <p th:text= "${listedtopic.user}">Topic Title</p>
+
+
                  </td>
 
                         </tr>
              </div>
                   </div>
-
+      -->
 
 
 </body>

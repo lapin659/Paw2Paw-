@@ -17,11 +17,11 @@ public class TopicService {
         User USER1 = new User();
         User USER2 = new User();
 
-        listOfTopics.add(new ForumTopic(User1, "UserA"));
-        /**
-        listOfTopics.add(new ForumTopic(User1, "UserA", USER1));  //construct user or call usertitle?
-        listOfTopics.add(new ForumTopic(User2, "UserB", USER2));
-         **/
+        listOfTopics.add(new ForumTopic(User1, "TitleA"));
+
+        listOfTopics.add(new ForumTopic(User1, "TitleA", USER1));  //construct user or call usertitle?
+        listOfTopics.add(new ForumTopic(User2, "TitleB", USER2));
+
 
 
         return listOfTopics;
