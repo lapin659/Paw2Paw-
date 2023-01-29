@@ -51,6 +51,12 @@ public class ForumTopic {
         this.user = user;
     }
 
+//temp
+    public ForumTopic(Long topicId, String title) {
+        this.topicId = topicId;
+        this.title = title;
+    }
+//////
     public Long getId() {
         return topicId;
     }

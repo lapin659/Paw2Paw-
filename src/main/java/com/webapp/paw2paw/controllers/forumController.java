@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -20,12 +19,13 @@ public class forumController {
         this.topicRepository = topicRepository;
     }
     @Autowired
-    TopicService topicService;
+    private TopicService topicService;
+    /**
     @RequestMapping({"forum.html"})
     public String displayForum(Model model){
         return "forum";
     }
-/**
+
 @GetMapping("forum")
 public String displayTopics(Model m){
     List<ForumTopic> topics = topicRepository.findAll();
@@ -33,7 +33,7 @@ public String displayTopics(Model m){
     return "forum";
 }
  **/
-    @GetMapping("forum")
+    @GetMapping("/forum.html")
     public String listTopics(Model model){
         List<ForumTopic> listTopics = topicService.getAllTopics();
         model.addAttribute("listedtopics", listTopics);
