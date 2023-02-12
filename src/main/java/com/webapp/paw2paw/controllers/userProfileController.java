@@ -1,9 +1,12 @@
 package com.webapp.paw2paw.controllers;
 
+import com.webapp.paw2paw.model.ForumTopic;
 import com.webapp.paw2paw.model.OrderHistory;
 import com.webapp.paw2paw.model.User;
+import com.webapp.paw2paw.repository.TopicRepository;
 import com.webapp.paw2paw.repository.UserRepository;
 import com.webapp.paw2paw.service.OrderService;
+import com.webapp.paw2paw.service.TopicService;
 import com.webapp.paw2paw.service.UserProfileService;
 import io.micrometer.core.lang.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,17 +15,29 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.security.Principal;
+import java.time.LocalDateTime;
 
 @Controller
 public class userProfileController {
     private UserProfileService userProfileService;
     @Autowired
     private UserRepository userRepos;
+
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private TopicService topicService;
+
+    private final TopicRepository topicRepos;
+    @Autowired
+    public userProfileController(TopicRepository topicRepos) {
+        this.topicRepos = topicRepos;
+    }
 
     @GetMapping({"/login", "login.html"})
     public String showLogin(){
@@ -111,6 +126,40 @@ public class userProfileController {
 
 
         return "user_profile";
+    }
+
+
+/**
+    @GetMapping("user_profile")
+    public String submitTopic(Model model, @PathVariable("id") String id, String content){
+        model.addAttribute("title", topicService.getAllTopics());
+        String topicTitle =
+    }
+
+**/
+
+
+    @PostMapping("user_profile")
+    public String addTopic(@RequestParam("title") String title,
+                         @RequestParam("content") String content,
+                         @RequestParam("id") Long id,
+                         HttpServletRequest request, HttpSession session, Model model){
+        ForumTopic topic = new ForumTopic();
+        topic.setContent(content);
+        topic.setTitle(title);
+        topic.setTimeStamp(LocalDateTime.now());
+        topic.setUser(userRepos.getById(id));
+
+        topicRepos.save(topic);
+
+
+        model.addAttribute("new topic", topic);
+        return "forum";
+        /**
+        String contextPath = request.getContextPath();
+        return new RedirectView(contextPath + "/user_profile.html");
+
+        return new RedirectView("/user_profile.html"); **/
     }
 
 

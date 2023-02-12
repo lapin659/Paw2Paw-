@@ -76,23 +76,18 @@
     </div>
     </div>
     <h3 style="color:#e68534;">Add a Topic</h3>
+    <form th:action="@{/topic}" method = "post">
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Topic Title</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1">
+        <input type="text" class="form-control" id="exampleFormControlInput1">
     </div>
     <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label">Content</label>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
     </div>
-    <button type="button" class = "btn btn-warning">Add Topic</button>
+    <button type="submit" class = "btn btn-warning">Add Topic</button>
 
-
-
-
-
-
-
-
+    </form>
 </div>
 
 <!--
