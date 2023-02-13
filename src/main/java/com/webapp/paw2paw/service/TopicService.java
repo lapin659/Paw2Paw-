@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 @Service
 public class TopicService {
@@ -22,9 +23,22 @@ public class TopicService {
         listOfTopics.add(new ForumTopic(User1, "TitleA", USER1));  //construct user or call usertitle?
         listOfTopics.add(new ForumTopic(User2, "TitleB", USER2));
 
-
-
         return listOfTopics;
     }
+
+
+
+    public ForumTopic getTopicById(Long topicId) {
+
+        Predicate<ForumTopic> byId = p -> p.getId().equals(topicId);
+        return filterTopics(byId);
+    }
+
+    public ForumTopic filterTopics(Predicate<ForumTopic> strategy) {
+        return getAllTopics().stream().filter(strategy).findFirst().orElse(null);
+    }
+
+
+
 
 }

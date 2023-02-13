@@ -130,16 +130,16 @@ public class userProfileController {
 
 
 /**
-    @GetMapping("user_profile")
-    public String submitTopic(Model model, @PathVariable("id") String id, String content){
-        model.addAttribute("title", topicService.getAllTopics());
-        String topicTitle =
+    @GetMapping("/user_profile")
+    public String submitTopic(Model model, @PathVariable("userId") Long id, String title, String content){
+        model.addAttribute("newTopic", topicService.getTopicById(id));
+        return "newTopic";
     }
 
 **/
 
 
-    @PostMapping("user_profile")
+    @PostMapping("/user_profile")
     public String addTopic(@RequestParam("title") String title,
                          @RequestParam("content") String content,
                          @RequestParam("id") Long id,
@@ -153,13 +153,16 @@ public class userProfileController {
         topicRepos.save(topic);
 
 
+/**
         model.addAttribute("new topic", topic);
         return "forum";
-        /**
-        String contextPath = request.getContextPath();
-        return new RedirectView(contextPath + "/user_profile.html");
 
-        return new RedirectView("/user_profile.html"); **/
+        String contextPath = request.getContextPath();
+        return new RedirectView(contextPath + "/newTopic");
+     **/
+
+        return "newTopic";
+
     }
 
 
