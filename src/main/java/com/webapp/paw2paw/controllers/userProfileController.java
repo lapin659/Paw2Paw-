@@ -12,10 +12,7 @@ import io.micrometer.core.lang.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -129,14 +126,14 @@ public class userProfileController {
     }
 
 
-/**
-    @GetMapping("/user_profile")
+
+    @GetMapping("/user_profile/{userId}")
     public String submitTopic(Model model, @PathVariable("userId") Long id, String title, String content){
         model.addAttribute("newTopic", topicService.getTopicById(id));
-        return "newTopic";
+        return "user_profile";
     }
 
-**/
+
 
 
     @PostMapping("/user_profile")
@@ -152,10 +149,9 @@ public class userProfileController {
 
         topicRepos.save(topic);
 
-
-/**
-        model.addAttribute("new topic", topic);
-        return "forum";
+        model.addAttribute("newTopic", topic);
+ /**
+  * return "forum";
 
         String contextPath = request.getContextPath();
         return new RedirectView(contextPath + "/newTopic");

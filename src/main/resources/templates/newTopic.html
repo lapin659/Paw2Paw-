@@ -8,7 +8,13 @@
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light static-top" style="background-color:#e68534;">
+<div xmlns:th="http://www.thymeleaf.org">
+<form th:action="@{/topic}" th:object="${newTopic}" method="post"  >
+    <input type="hidden" name="id_topic" th:value="${newTopic.getId()}"/>
+    <button class="chip left" style="background-color: #37b7ab;">Set useful/useless</button>
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light static-top" style="background-color:#e68534;">
     <div class="container">
         <a class="navbar-brand" href="/" style="color:#e68534;">Community</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
@@ -37,12 +43,7 @@
     </div>
 </nav>
 
-
-
-<form th:action="@{topic}" th:object="${newTopic}"method="post"  >
-    <input type="hidden" name="id_topic" th:value="${newTopic.getId()}"/>
-    <button class="chip left" style="background-color: #37b7ab;">Set useful/useless</button>
-</form>
+    </form>
 
 
 
@@ -50,7 +51,7 @@
 
 
 
-
+</div>
 
 </body>
 </html>

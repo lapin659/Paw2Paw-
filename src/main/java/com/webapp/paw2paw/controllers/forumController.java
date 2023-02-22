@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -39,6 +40,17 @@ public String displayTopics(Model m){
         model.addAttribute("listedtopics", listTopics);
         return "forum";
     }
+
+    @GetMapping("topics/user/{id}")
+    public String showTopicByUser(@PathVariable String id, Model model){
+        //List<ForumTopic> forumTopics = topicRepository.findForumTopicsByUser_IdOrderByCreatedDate(Long.valueOf(id));
+        //model.addAttribute("forumTopics", forumTopics);
+        ForumTopic selectedTopic = topicService.getTopicById(Long.valueOf(id));
+        model.addAttribute("selectedTopic", selectedTopic);
+        return "newTopic";
+
+    }
+
 
 
 

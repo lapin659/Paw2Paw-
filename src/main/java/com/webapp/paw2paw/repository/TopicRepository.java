@@ -12,4 +12,7 @@ public interface TopicRepository extends JpaRepository<ForumTopic, Long> {
     @Nullable
     ForumTopic findTopicById(Long id);
 
+   // List<ForumTopic> findForumTopicsByUser_IdOrderByCreatedDate(Long id);
+
+
 }
