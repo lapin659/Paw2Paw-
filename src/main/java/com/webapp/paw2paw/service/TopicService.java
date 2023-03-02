@@ -26,7 +26,10 @@ public class TopicService {
         return listOfTopics;
     }
 
-
+    public ForumTopic getTopicByUser(String userName){
+        Predicate<ForumTopic> byUser = p -> p.getUser().getUsername().equals(userName);
+        return filterTopics(byUser);
+    }
 
     public ForumTopic getTopicById(Long topicId) {
 
@@ -34,9 +37,11 @@ public class TopicService {
         return filterTopics(byId);
     }
 
+
     public ForumTopic filterTopics(Predicate<ForumTopic> strategy) {
         return getAllTopics().stream().filter(strategy).findFirst().orElse(null);
     }
+
 
 
 

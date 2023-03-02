@@ -45,9 +45,13 @@ public String displayTopics(Model m){
     public String showTopicByUser(@PathVariable String id, Model model){
         //List<ForumTopic> forumTopics = topicRepository.findForumTopicsByUser_IdOrderByCreatedDate(Long.valueOf(id));
         //model.addAttribute("forumTopics", forumTopics);
-        ForumTopic selectedTopic = topicService.getTopicById(Long.valueOf(id));
+        //ForumTopic selectedTopic = topicService.getTopicById(Long.valueOf(id));
+        ForumTopic selectedTopic = topicService.getTopicByUser(id);
+       // ForumTopic selected = topicRepository.findTopicById(Long.valueOf(id));
+       // model.addAttribute("selected", selected);
         model.addAttribute("selectedTopic", selectedTopic);
-        return "newTopic";
+        model.addAttribute("topicService", topicService);
+        return "forum";
 
     }
 

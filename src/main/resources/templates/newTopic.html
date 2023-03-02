@@ -5,13 +5,15 @@
     <link th:rel="stylesheet" th:href="@{assets/bootstrap-slider/css/bootstrap-slider.css}"/>
     <link th:rel="stylesheet" th:href="@{webjars/bootstrap/5.1.3/css/bootstrap.min-jsf.css} "/>
     <link th:rel="stylesheet" th:href="@{webjars/font-awesome/6.1.0/css/all.css} "/>
-
+    <p class="col s12" style="text-align: justify; display:block; white-space:pre-wrap"
+       th:text="${topic.getContent()}">Topic's content</p>
 </head>
 <body>
 <div xmlns:th="http://www.thymeleaf.org">
-<form th:action="@{/topic}" th:object="${newTopic}" method="post"  >
-    <input type="hidden" name="id_topic" th:value="${newTopic.getId()}"/>
-    <button class="chip left" style="background-color: #37b7ab;">Set useful/useless</button>
+<form th:action="@{/topic}" th:object="${topic}" method="post"  >
+    <input type="hidden" name="id_topic" th:value="${topic.getTitle()}"/>
+    <input type="hidden" name="id_content" th:value="${topic.getContent()}"/>
+
 
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light static-top" style="background-color:#e68534;">

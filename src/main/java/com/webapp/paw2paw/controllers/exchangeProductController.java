@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
-import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -90,15 +89,14 @@ public class exchangeProductController {
 
 
 
-    @PostMapping({"/exchange_saved","user_profile"})
-    public String showExchangeHistory(@ModelAttribute OrderHistory orderHistory, Model model, Principal principal){
+    @PostMapping("/exchange_saved")
+    public String showExchangeHistory(@ModelAttribute OrderHistory orderHistory, Model model){
         String exchangeItem = orderHistory.getExchangeItem();
         model.addAttribute("exchangeItem", exchangeItem);
         User u = new User();
         u.setUsername("a");
         u.setEmail("b");
         model.addAttribute("currU", u);
-
 
         return "user_profile";
     }
