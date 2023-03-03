@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
 @Controller
@@ -48,10 +50,10 @@ public class newTopicController {
     }
 
     @PostMapping("newTopic/{id}")
-    public String updateTopic(@RequestParam String topic_Id){
-        return "newTopic/" + topic_Id;
+    public RedirectView updateTopic(@RequestParam String topic_Id, HttpServletRequest request) {
+        String contextPath = request.getContextPath();
+        return new RedirectView(contextPath + "/newTopic/" + topic_Id);
     }
-
 
 
 }

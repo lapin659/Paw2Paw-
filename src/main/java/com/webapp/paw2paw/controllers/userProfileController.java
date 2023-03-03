@@ -33,8 +33,9 @@ public class userProfileController {
     private final TopicRepository topicRepos;
 
     @Autowired
-    public userProfileController(TopicRepository topicRepos) {
+    public userProfileController(TopicRepository topicRepos, UserRepository userRepos) {
         this.topicRepos = topicRepos;
+        this.userRepos = userRepos;
     }
 
     @GetMapping({"/login", "login.html"})
@@ -117,37 +118,44 @@ public class userProfileController {
 
 
 
-     @RequestMapping(path = "/user_profile/{userId}", method = RequestMethod.GET)
-     public String submitTopic(Model model, @PathVariable("userId") Long id, String title, String content){
-        model.addAttribute("newTopic", topicService.getTopicById(id));
+     @GetMapping("user_profile/{userEmail}")
+     public String submitTopic(Model model, @PathVariable("userEmail") String userEmail){
+       // model.addAttribute("newTopic", topicService.getTopicById(id));
+         User currUser = userRepos.findByEmail(userEmail);
+         Long topicId = currUser.getId();
+
+         model.addAttribute("user", currUser);
+         model.addAttribute("topicId", topicId);
+         model.addAttribute("newTopic", topicService.getTopicById(topicId));
         return "user_profile";
      }
 
 
     @PostMapping("user_profile")
+   // @ResponseBody
     public RedirectView addTopic(@RequestParam("title") String title,
                                  @RequestParam("content") String content,
-                                 @RequestParam("id") Long id,
+                                 @RequestParam("userId") Long userId,
                                  HttpServletRequest request) {
 
         ForumTopic topic = new ForumTopic();
         topic.setContent(content);
         topic.setTitle(title);
         topic.setTimeStamp(LocalDateTime.now());
-        topic.setUser(userRepos.getById(id));
+        topic.setUser(userRepos.getById(userId));
         topicRepos.save(topic);
         String contextPath = request.getContextPath();
-
-        return new RedirectView( contextPath +"/newTopic");
-
+        // model.addAttribute("newTopic", topic);
+        return new RedirectView( contextPath +"/user_profile");
+        // return "newTopic";
     }
 
 }
 
 /*
-          model.addAttribute("newTopic", topic);
 
-  return "forum";* /
+
+ ;* /
 
 
 
