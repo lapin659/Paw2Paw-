@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/online" lang="">
+<html lang = en xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Community</title>
     <link th:rel="stylesheet" th:href="@{assets/bootstrap-slider/css/bootstrap-slider.css}"/>
     <link th:rel="stylesheet" th:href="@{webjars/bootstrap/5.1.3/css/bootstrap.min-jsf.css} "/>
     <link th:rel="stylesheet" th:href="@{webjars/font-awesome/6.1.0/css/all.css} "/>
+    <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css" />
+    <!--- temp for testing -->
     <p class="col s12" style="text-align: justify; display:block; white-space:pre-wrap"
        th:text="${topic.getContent()}">Topic's content</p>
+    <p class="col s12" style="text-align: justify; display:block; white-space:pre-wrap"
+       th:text="${topic.getTitle()}">Topic's title</p>
+
 </head>
 <body>
 <div xmlns:th="http://www.thymeleaf.org">

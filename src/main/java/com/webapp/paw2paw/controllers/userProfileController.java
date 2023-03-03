@@ -146,8 +146,8 @@ public class userProfileController {
         topicRepos.save(topic);
         String contextPath = request.getContextPath();
         // model.addAttribute("newTopic", topic);
-        return new RedirectView( contextPath +"/user_profile");
-        // return "newTopic";
+        //    return new RedirectView( contextPath +"/user_profile");
+        return new RedirectView(contextPath + "/newTopic/" + userId);
     }
 
 }
