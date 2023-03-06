@@ -112,7 +112,6 @@ public class userProfileController {
         String currEmail = principal.getName();
         model.addAttribute("currUser", user);
         //model.addAttribute("currU", new User());
-
         return "user_profile";
     }
 
@@ -122,11 +121,11 @@ public class userProfileController {
      public String submitTopic(Model model, @PathVariable("userEmail") String userEmail){
        // model.addAttribute("newTopic", topicService.getTopicById(id));
          User currUser = userRepos.findByEmail(userEmail);
-         Long topicId = currUser.getId();
+         Long userId = currUser.getId();
 
          model.addAttribute("user", currUser);
-         model.addAttribute("topicId", topicId);
-         model.addAttribute("newTopic", topicService.getTopicById(topicId));
+         model.addAttribute("userId", userId);
+         model.addAttribute("newTopic", topicService.getTopicById(userId));
         return "user_profile";
      }
 
@@ -151,16 +150,6 @@ public class userProfileController {
     }
 
 }
-
-/*
-
-
- ;* /
-
-
-
-
-
 
 
 

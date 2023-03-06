@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang = en xmlns:th="http://www.thymeleaf.org">
+<html lang = en xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorator="layout/outline">
 <head>
     <title>Community</title>
     <link th:rel="stylesheet" th:href="@{assets/bootstrap-slider/css/bootstrap-slider.css}"/>
@@ -7,56 +8,67 @@
     <link th:rel="stylesheet" th:href="@{webjars/font-awesome/6.1.0/css/all.css} "/>
     <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css" />
-    <!--- temp for testing -->
+
+    <title th:text="${topic.getTitle()} + '| JF'">Topic's title | JF</title>
+    <!--- temp for testing
     <p class="col s12" style="text-align: justify; display:block; white-space:pre-wrap"
        th:text="${topic.getContent()}">Topic's content</p>
-    <p class="col s12" style="text-align: justify; display:block; white-space:pre-wrap"
-       th:text="${topic.getTitle()}">Topic's title</p>
-
+     -->
 </head>
 <body>
-<div xmlns:th="http://www.thymeleaf.org">
-<form th:action="@{/newTopic}" th:object="${topic}" method="post"  >
-    <input type="hidden" name="id_topic" th:value="${topic.getTitle()}"/>
-    <input type="hidden" name="id_content" th:value="${topic.getContent()}"/>
+    <div xmlns:th="http://www.thymeleaf.org">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light static-top" style="background-color:#e68534;">
+            <div class="container">
+                <a class="navbar-brand" href="/" style="color:#e68534;">Community</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                        aria-controls="navbarResponsive"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="homepage.html">Home</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.html">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="register.html">Register</a>
+                        </li>
 
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="list-group">
+            <!--
+            <h3 style="color:#e68534;">Order History</h3>
+            <form th:action="@{/order}" th:object="${myOrders}">
+            -->
+            <form>
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1" style="color:#e68534;" th:text="${topic.getTitle()}">Topic's Title</h5>
+                        <small th:text="${topic.showTimestamp()}"> timestamp </small>
+                    </div>
+                    <a th:href="@{'/user_profile/'+ ${topic.getUser().getUsername()}}"
+                       class="badge rounded-pill text-bg-warning">Username</a>
+                    <p class="mb-1" th:text= "${topic.getContent()}">Content</p>
 
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light static-top" style="background-color:#e68534;">
-    <div class="container">
-        <a class="navbar-brand" href="/" style="color:#e68534;">Community</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="homepage.html">Home
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-            </ul>
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="login.html">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="register.html">Register</a>
-                </li>
-
-            </ul>
+                </a>
+            </form>
         </div>
-    </div>
-</nav>
-
-    </form>
 
 
-
-
-
+        <!--
+        <form th:action="@{/newTopic}" th:object="${topic}" method="post"  >
+        <input type="hidden" name="id_topic" th:value="${topic.getTitle()}"/>
+        <input type="hidden" name="id_content" th:value="${topic.getContent()}"/>
+        </form>
+    -->
 
 
 </div>

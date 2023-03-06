@@ -87,12 +87,11 @@
         <input type="text" class="form-control" name = "title" id="exampleFormControlInput1">
     </div>
     <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Content</label>
+        <label for="content" class="form-label">Content</label>
         <textarea class="form-control" name="content" > </textarea>
     </div>
-
-        <input type="hidden" name="userId" th:value="${currUser.getId()}"/>
-
+          <!--do not delete the above, or raises 400 request param not present-->
+          <input type="hidden" name="userId" th:value="${currUser.getId()}"/>
     <button type="submit" class = "btn btn-warning">Add Topic</button>
 
     </form>
