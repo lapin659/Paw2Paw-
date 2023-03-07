@@ -36,21 +36,29 @@ public String displayTopics(Model m){
  **/
     @GetMapping("/forum.html")
     public String listTopics(Model model){
-        List<ForumTopic> listTopics = topicService.getAllTopics();
-        model.addAttribute("listedtopics", listTopics);
+
+        //List<ForumTopic> listTopics = topicService.getAllTopics();
+        //model.addAttribute("listedtopics", listTopics);
+        List<ForumTopic> allTopics = topicRepository.findAll();
+        model.addAttribute("allTopics", allTopics);
         return "forum";
     }
 
     @GetMapping("topics/user/{id}")
     public String showTopicByUser(@PathVariable String id, Model model){
-        //List<ForumTopic> forumTopics = topicRepository.findForumTopicsByUser_IdOrderByCreatedDate(Long.valueOf(id));
-        //model.addAttribute("forumTopics", forumTopics);
-        //ForumTopic selectedTopic = topicService.getTopicById(Long.valueOf(id));
+        /**
+        List<ForumTopic> forumTopics = topicRepository.findForumTopicsByUser_IdOrderByCreatedDate(Long.valueOf(id));
+        model.addAttribute("forumTopics", forumTopics);
+        ForumTopic selectedTopic = topicService.getTopicById(Long.valueOf(id));
         ForumTopic selectedTopic = topicService.getTopicByUser(id);
-       // ForumTopic selected = topicRepository.findTopicById(Long.valueOf(id));
-       // model.addAttribute("selected", selected);
+         **/
+        List<ForumTopic> userTopics = topicRepository.findForumTopicsByUser_Id(Long.valueOf(id));
+       /** ForumTopic selected = topicRepository.findTopicById(Long.valueOf(id));
+        model.addAttribute("selected", selected);
         model.addAttribute("selectedTopic", selectedTopic);
         model.addAttribute("topicService", topicService);
+        **/
+       model.addAttribute("selectedTopic", userTopics);
         return "forum";
 
     }

@@ -49,13 +49,14 @@
                   </thead>
                   <tbody>
                   <div class="row" xmlns:th="http://www.thymeleaf.org">
-                      <div th:each="listedtopic, stat:${listedtopics}">
+                      <div th:each="topic, stat:${allTopics}">
                     <tr>
                         <th scope="row"> 1</th>
-                        <td th:text= "${listedtopic.title}"></td>
+                        <td th:text= "${topic.getTitle()}"></td>
                         <td>UserA</td>
                         <td>Timestamp 1</td>
-                        <td><a th:href="@{'/topic/' + ${selected}}" class = "btn btn-outline-warning">Thread</a>
+                        <td>
+                            <a th:href="@{'/topic/' + ${topic.getId()}}" class = "btn btn-outline-warning">Thread</a>
                       </td>
                     </tr>
                       </div>
