@@ -18,6 +18,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 public class userProfileController {
@@ -55,6 +56,18 @@ public class userProfileController {
             model.addAttribute("currUsername", currUser);
             User curr = userRepos.findByEmail(currUser);
             //find order by  user id
+
+
+            if (!curr.getOrders().isEmpty()){
+                List<OrderHistory> currOrders = curr.getOrders();
+                model.addAttribute("currOrders", currOrders);
+            }else{
+
+                model.addAttribute("nullOrder", new OrderHistory());
+
+            }
+
+
             model.addAttribute("myOrders", orderService.findUserOrder(curr));
             //return list of orderhistory
             model.addAttribute("currUser", curr);
@@ -93,7 +106,8 @@ public class userProfileController {
 
 
     @PostMapping({"/exchange_saved", "/buy_saved"})
-    public String showExchangeHistory(@ModelAttribute OrderHistory orderHistory, Model model, Principal principal, User user) {
+    public String showExchangeHistory(@ModelAttribute OrderHistory orderHistory, Model model,
+                                      Principal principal, User user) {
         String exchangeItem = orderHistory.getExchangeItem();
         model.addAttribute("exchangeItem", exchangeItem);
         String currEmail = principal.getName();

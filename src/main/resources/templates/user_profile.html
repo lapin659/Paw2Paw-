@@ -23,6 +23,18 @@
         <a class="navbar-brand" href="homepage.html" style="color:#e68534;" id="logoutPage" >Log Out</a>
     </nav>
 
+
+<table class="striped bordered centered">
+    <tbody>
+    <th:block th:each="currOrder: ${currOrders}">
+        <tr>
+            <td th:text="${currOrder.getOrderItem()}">Order Name</td>
+        </tr>
+    </th:block>
+     </tbody>
+</table>
+
+
 <!--
 <div th:object="${myOrders}"  >order history</div>
 -->
@@ -39,6 +51,8 @@
         </div>
         <p class="mb-1">Order Details</p>
         <small>Order Status: </small>
+
+
     </a>
     <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-between">
