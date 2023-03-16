@@ -21,7 +21,7 @@ public class OrderHistory {
 
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "CustomerName")
+    @JoinColumn(name = "userId")
     private User user;
     @Column(name = "exchangeItem", length = 30)
     private String exchangeItem;

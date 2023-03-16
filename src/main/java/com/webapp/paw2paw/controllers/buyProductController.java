@@ -13,12 +13,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.util.List;
@@ -61,6 +61,8 @@ public class buyProductController {
     @PostMapping("/save_buy")
     public String exchangeSubmit(Model model,@ModelAttribute ("submission") OrderHistory submission){
 
+        orderRepo.save(submission);
+
          model.addAttribute("buyItem", submission.getOrderItem());
          model.addAttribute("message",submission.getBuyerMessage());
          model.addAttribute("currOrders", orderService);
@@ -75,49 +77,82 @@ public class buyProductController {
                                Principal principal) {
 
         model.addAttribute("buy", productService.getProductById(productId));
-       // productService.saveProduct(productService.getProductById(productId));
+
+
         String orderProduct = productService.getProductById(productId).getProductName();
+
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userEmail = authentication.getName();
+        User currBuyer = userRepo.findByEmail(userEmail);
 
         OrderHistory orderHistory = new OrderHistory();
         orderHistory.setOrderItem(orderProduct);
+        orderHistory.setUser(currBuyer);
+        orderHistory.setOrderId(Long.parseLong(productId));
         //model.addAttribute("loggedUser", u);
+        orderRepo.save(orderHistory);
 
+        model.addAttribute("currBuyer", currBuyer);
+        model.addAttribute("orderProduct", orderProduct);
         model.addAttribute("currOrder", orderHistory);
       //  model.addAttribute("currOrders", orderService);
         session.setAttribute("currEmail", buyerEmail);
-/**
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-       String currUser = authentication.getName();
-        model.addAttribute("loggedUser", currUser);
-**/
+
         return "buy";
 
     }
 
     @PostMapping("/buy")
-    public String newOrder(@ModelAttribute OrderHistory buyOrder, Model model, BindingResult bindingResult, HttpSession session){
-        String customerEmail = (String) session.getAttribute("currEmail");
-        orderService.addOrder(buyOrder, userRepo.findByEmail(customerEmail));
+    public String newOrder(@ModelAttribute OrderHistory buyOrder, Model model,
+                            HttpSession session, HttpServletRequest request){
+        //String customerEmail = (String) session.getAttribute("currEmail");
+
+       // orderService.addOrder(buyOrder, userRepo.findByEmail(customerEmail));
+
+
+        orderRepo.save(buyOrder);
+
         model.addAttribute("buyOrder", buyOrder);
-
-
-
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currUser = authentication.getName();
-        model.addAttribute("loggedUser", currUser);
-
         User customer = userRepo.findByEmail(currUser);
+        model.addAttribute("customer", customer.getUsername());
+
+
         orderService.addOrder(buyOrder,customer);
-        List<OrderHistory> Orders = orderService.getAllOrders();
+        List<OrderHistory> Orders = orderService.findUserOrder(customer);
         model.addAttribute("orders", Orders);
 
-
-        return "buy_saved";
+        String contextPath = request.getContextPath();
+        //  return new RedirectView(contextPath + "/user_profile/" + customer.getUsername());
+       return "buy_saved";  //"user_profile" raising 500 parsing error
 
     }
 
 
+/**
+@PostMapping("/buy")
+// @ResponseBody
+public String addOrder(@RequestParam("orderProduct") String orderProduct,
+                             @RequestParam("buyerMessage") String buyerMessage,
+                             @RequestParam("orderId") Long orderId) {
+
+    OrderHistory orderHis = new OrderHistory();
+    orderHis.setOrderItem(orderProduct);
+    orderHis.setOrderId(orderId);
+    orderHis.setBuyerMessage(buyerMessage);
+
+    orderRepo.save(orderHis);
+
+    // model.addAttribute("newTopic", topic);
+    //    return new RedirectView( contextPath +"/user_profile");
+    return "buy_saved";
+}
+
+
+**/
 
 
 

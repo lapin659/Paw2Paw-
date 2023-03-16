@@ -21,12 +21,9 @@
        <div class="card-body">
            <tr>
                <td>
-                   <h5 class="card-title" style="color:#e68534;" th:text="${buy.productName}"  > Product name</h5>
-                  <!--
-                   <div th:text="*{orderItem}"></div>
-                   <h5 class="card-title"  th:field="*{exchangeItem}" ></h5>
-
-                   <div th:text="${loggedUser}"></div>-->
+                   <h5 class="card-title" style="color:#e68534;" th:text="${buy.productName}">
+                       Product name</h5>
+                   <input type="hidden" name="orderItem" th:value="${buy.productName}"/>
                </td>
                <td>
                    <div th:text="${session.currEmail}"></div>
@@ -38,8 +35,10 @@
                 <label th:text = "'Message  '+ ${buy.seller} + ' (the seller)'"  >  </label>
                 <br/>
                 <br/>
-                <textarea class="form-control" id="message" rows="3" th:field="*{buyerMessage}"  ></textarea>
+                <textarea class="form-control" id="message" rows="3" name="buyerMessage"
+                          th:field="*{buyerMessage}"  ></textarea>
        <br/>
+       <input type="hidden" name="userId" th:value="${currBuyer.getId()}"/>
         <button type="submit" class="btn btn-warning text-center"> Confirm Buy</button>
    </form>
 </div>

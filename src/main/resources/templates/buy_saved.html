@@ -21,7 +21,7 @@
 
         <a class="navbar-brand" href="homepage.html" style="color:#e68534;">Paw2Paw</a>
         <a class="navbar-brand" th:href="@{/user_profile}" style="color:#e68534;">My Account</a>
-        <a class="navbar-brand disabled" th:text="${loggedUser}" style="color:#e68534;"  ></a>
+        <a class="navbar-brand disabled" th:text="${customer}" style="color:#e68534;"  ></a>
     </nav>
 
 
@@ -32,11 +32,15 @@
 
            <tr>
                <td>
-                     <div th:text="${buyOrder.orderItem}"></div>
+                   <!--this is static, needs to be dynamic
                    <h5 class="card-title" th:text= "${orders[0].orderItem}">Product name</h5>
-                   <div th:text=" '$' + ${orders[0].orderPrice}"></div>
-                   <div th:text="${buyOrder.orderItem}"></div>
+         <h5 class="card-title" name="orderItem" ></h5>
+                  -->
+                   <!-- L40 is working, do not change -->
+                   <h5 class="card-title" th:text= "${buyOrder.orderItem}"></h5>
+                   <div th:text="${buyOrder.getUser().getUsername()}"></div>
 
+                   <div th:text=" '$' + ${orders[0].orderPrice}"></div>
                </td>
 
            </tr>
@@ -45,8 +49,10 @@
                 <br/>
                 <br/>
         <p class="card-text">Your Message to the seller: </p>
-                <textarea class="form-control" id="buyerMessage" rows="3" th:text="${buyOrder.buyerMessage}"  ></textarea>
-
+            <textarea class="form-control" id="buyerMessage" rows="3" th:text="${buyOrder.buyerMessage}"  ></textarea>
+           <!--
+        <textarea class="form-control" name="buyerMessage" rows="3"  ></textarea>
+        -->
     </div>
 </div>
 </body>
