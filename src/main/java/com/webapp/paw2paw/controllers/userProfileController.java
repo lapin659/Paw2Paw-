@@ -3,6 +3,7 @@ package com.webapp.paw2paw.controllers;
 import com.webapp.paw2paw.model.ForumTopic;
 import com.webapp.paw2paw.model.OrderHistory;
 import com.webapp.paw2paw.model.User;
+import com.webapp.paw2paw.repository.OrderRepository;
 import com.webapp.paw2paw.repository.TopicRepository;
 import com.webapp.paw2paw.repository.UserRepository;
 import com.webapp.paw2paw.service.OrderService;
@@ -32,9 +33,12 @@ public class userProfileController {
     private TopicService topicService;
 
     private final TopicRepository topicRepos;
+    @Autowired
+    private  OrderRepository orderRepo;
 
     @Autowired
-    public userProfileController(TopicRepository topicRepos, UserRepository userRepos) {
+    public userProfileController(TopicRepository topicRepos,
+                                 UserRepository userRepos) {
         this.topicRepos = topicRepos;
         this.userRepos = userRepos;
     }
@@ -82,20 +86,64 @@ public class userProfileController {
 
     }
 
-    @PostMapping("/productList")
-    public String showUsername(Principal principal, Model model, HttpServletRequest request) {
-        if (!principal.getName().isEmpty()) {
-            String currUser = principal.getName();
-            model.addAttribute("showUser", currUser);
-            String userEmail = request.getUserPrincipal().getName();
-            User currU = userRepos.findByEmail(userEmail);
-            model.addAttribute("currUser", currU);
-        } else {
-            model.addAttribute("cu", new User());
 
-        }
+    @GetMapping("/user_profile/{userId}")
+    public String showProfileById(@PathVariable Long userId, Model model){
+        User currUser = userRepos.getById(userId);
+
+        List<OrderHistory> currOrders = orderRepo.findOrderHistoryByUserId(userId);
+        List<ForumTopic> currTopics = topicRepos.findForumTopicsByUser_Id(userId);
+
+        model.addAttribute("currUser", currUser);
+        model.addAttribute("currOrders", currOrders);
+        model.addAttribute("currTopics", currTopics);
+
+        return "user_profile";
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @GetMapping("/productList/{userName}")
+    public String showMarketplace(Principal principal, Model model,
+                                  @PathVariable("userName") String userName,
+                                  HttpServletRequest request) {
+
+        User currUser = userRepos.findByUsername(userName);
+        Long userId = currUser.getId();
+
+        model.addAttribute("user", currUser);
+        model.addAttribute("userId", userId);
+
         return "productList";
 
+    }
+
+
+    @PostMapping("user_profile/{userId}")
+    // @ResponseBody
+    public RedirectView toMarketplace(
+                                @RequestParam("userId") Long userId,
+                                HttpServletRequest request) {
+
+        OrderHistory orderHistory = new OrderHistory();
+        orderHistory.setOrderId(userId);
+        orderHistory.setUser(userRepos.getById(userId));
+        orderRepo.save(orderHistory);
+        String contextPath = request.getContextPath();
+        // model.addAttribute("newTopic", topic);
+        //    return new RedirectView( contextPath +"/user_profile");
+        return new RedirectView(contextPath + "/productList/" + userId);
     }
 
 

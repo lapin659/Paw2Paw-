@@ -13,6 +13,7 @@ import java.util.List;
 @Repository
 public interface OrderRepository extends JpaRepository<OrderHistory, Long> {
     @Query("SELECT o FROM OrderHistory o WHERE o.orderId = ?2")
+    // @Query("SELECT o FROM OrderHistory o WHERE o.userId = ?1")
     @Nullable
     OrderHistory findOrderHistoryByOrderId(Long orderId);
     //OrderHistory findByProductName(String orderName);

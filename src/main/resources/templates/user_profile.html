@@ -19,7 +19,8 @@
             <span class="navbar-band mb-0 h3 mx-lg-auto ml-lg-auto" style="color:#e68534;" th:text="${currUser.username}"> </span>
         </a>
         <a class="navbar-brand" href="homepage.html" style="color:#e68534;">Paw2Paw</a>
-        <a class="navbar-brand" href="productList.html" style="color:#e68534;">Marketplace</a>
+        <a class="navbar-brand" th:href="@{'/productList/' + ${currUser.getUsername()}}"
+           style="color:#e68534;">Marketplace</a>
         <a class="navbar-brand" href="homepage.html" style="color:#e68534;" id="logoutPage" >Log Out</a>
     </nav>
 
@@ -88,10 +89,10 @@
         </a>
     </div>
     </div>
-<!--
-    <a th:href="@{'/topics/user/' + ${currUser.getId()}}" style="display: block; color: #26a69a"></a>
 
--->
+    <!--  <a th:href="@{'/topics/user/' + ${currUser.getId()}}" style="display: block; color: #26a69a"></a>
+--
+  -->
     <h3 style="color:#e68534;">Add a Topic</h3>
 
       <form th:action="@{/user_profile}" th:object="${newTopic}" method = "post">

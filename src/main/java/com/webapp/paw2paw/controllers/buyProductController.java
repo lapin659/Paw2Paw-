@@ -13,10 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -85,6 +82,7 @@ public class buyProductController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userEmail = authentication.getName();
         User currBuyer = userRepo.findByEmail(userEmail);
+        Long userId = currBuyer.getId();
 
         OrderHistory orderHistory = new OrderHistory();
         orderHistory.setOrderItem(orderProduct);
@@ -92,8 +90,10 @@ public class buyProductController {
         orderHistory.setOrderId(Long.parseLong(productId));
         //model.addAttribute("loggedUser", u);
         orderRepo.save(orderHistory);
+        userRepo.save(currBuyer);
 
         model.addAttribute("currBuyer", currBuyer);
+        model.addAttribute("userId", userId);
         model.addAttribute("orderProduct", orderProduct);
         model.addAttribute("currOrder", orderHistory);
       //  model.addAttribute("currOrders", orderService);
@@ -105,7 +105,8 @@ public class buyProductController {
 
     @PostMapping("/buy")
     public String newOrder(@ModelAttribute OrderHistory buyOrder, Model model,
-                            HttpSession session, HttpServletRequest request){
+                           HttpSession session, HttpServletRequest request,
+                           @RequestParam("userId") Long userId){
         //String customerEmail = (String) session.getAttribute("currEmail");
 
        // orderService.addOrder(buyOrder, userRepo.findByEmail(customerEmail));
@@ -126,8 +127,8 @@ public class buyProductController {
         model.addAttribute("orders", Orders);
 
         String contextPath = request.getContextPath();
-        //  return new RedirectView(contextPath + "/user_profile/" + customer.getUsername());
-       return "buy_saved";  //"user_profile" raising 500 parsing error
+        //  return new RedirectView(contextPath + "/user_profile/" + userId);
+         return "buy_saved";  //"user_profile" raising 500 parsing error
 
     }
 
