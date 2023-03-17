@@ -27,7 +27,10 @@ public class OrderRepositoryTest {
     @Test
     public void testCreateOrder(){
         User customer = new User();
+        customer.setUsername("customerName");
+
         OrderHistory orderHistory = new OrderHistory();
+
         orderHistory.setOrderItem("dogleash");
         orderHistory.setUser(customer);
         orderHistory.setBuyerMessage("hello");
@@ -37,6 +40,8 @@ public class OrderRepositoryTest {
         OrderHistory savedOrder = orderRepo.save(orderHistory);
         OrderHistory existOrder = entityManager.find(OrderHistory.class, savedOrder.getOrderId());
         assertThat(existOrder.getOrderItem()).isEqualTo(orderHistory.getOrderItem());
+        assertThat(existOrder.getUser().getUsername()).isEqualTo("customerName");
+        assertThat(orderRepo.findByUser(customer).get(0).getUser().getUsername()).isEqualTo("customerName");
 
     }
 

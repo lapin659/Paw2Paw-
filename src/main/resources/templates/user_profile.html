@@ -19,17 +19,24 @@
             <span class="navbar-band mb-0 h3 mx-lg-auto ml-lg-auto" style="color:#e68534;" th:text="${currUser.username}"> </span>
         </a>
         <a class="navbar-brand" href="homepage.html" style="color:#e68534;">Paw2Paw</a>
+        <!--
         <a class="navbar-brand" th:href="@{'/productList/' + ${currUser.getUsername()}}"
            style="color:#e68534;">Marketplace</a>
+           -->
+        <a class="navbar-brand" href="productList.html" style="color:#e68534;">Marketplace</a>
         <a class="navbar-brand" href="homepage.html" style="color:#e68534;" id="logoutPage" >Log Out</a>
     </nav>
 
-
+/
 <table class="striped bordered centered">
     <tbody>
     <th:block th:each="currOrder: ${currOrders}">
         <tr>
             <td th:text="${currOrder.getOrderItem()}">Order Name</td>
+            <td th:text="${currOrder.getUser().getUsername()}">User Name</td>
+            <td th:text="${currOrder.getBuyerMessage()}">Buyer Message</td>
+            <td th:text="${currOrder.getOrderId()}">Order Id</td>
+            <td th:text="${currOrder.getOrderPrice()}">Order Price</td>
         </tr>
     </th:block>
      </tbody>
@@ -44,13 +51,13 @@
         <div class = "col">
 <div class="list-group">
     <h3 style="color:#e68534;">Order History</h3>
-    <form th:action="@{/order}" th:object="${myOrders}">
+    <form th:action="@{/user_profile}" method = "post">
     <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1" style="color:#e68534;"  >Order 001</h5>
+            <h5 class="mb-1" style="color:#e68534;">Order 001</h5>
             <small>3 days ago</small>
         </div>
-        <p class="mb-1">Order Details</p>
+        <p class="mb-1" >Order Details</p>
         <small>Order Status: </small>
 
 
@@ -102,7 +109,7 @@
         <input type="text" class="form-control" name = "title" id="exampleFormControlInput1">
     </div>
     <div class="mb-3">
-        <label for="content" class="form-label">Content</label>
+        <label for= "content" class="form-label">Content</label>
         <textarea class="form-control" name="content" > </textarea>
     </div>
           <!--do not delete the above, or raises 400 request param not present-->

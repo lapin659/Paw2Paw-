@@ -27,7 +27,8 @@
                </td>
                <td>
                    <div th:text="${session.currEmail}"></div>
-                   <p class="card-text" th:text = " '$' + ${buy.price}"></p>
+                   <p class="card-text"
+                      th:text = " '$' + ${currOrder.getOrderPrice()}"></p>
                </td>
            </tr>
        </div>

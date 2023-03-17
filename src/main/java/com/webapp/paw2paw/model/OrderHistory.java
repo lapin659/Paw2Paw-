@@ -30,7 +30,8 @@ public class OrderHistory {
 
 
 
-    public OrderHistory(String orderItem, String exchangeItem, String buyerMessage, Long orderId, User user, double orderPrice) {
+    public OrderHistory(String orderItem, String exchangeItem, String buyerMessage,
+                        Long orderId, User user, double orderPrice) {
         this.orderItem = orderItem;
         this.exchangeItem = exchangeItem;
         this.buyerMessage = buyerMessage;

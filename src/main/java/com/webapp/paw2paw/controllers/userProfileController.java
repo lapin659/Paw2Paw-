@@ -112,7 +112,7 @@ public class userProfileController {
 
 
 
-
+/**
 
     @GetMapping("/productList/{userName}")
     public String showMarketplace(Principal principal, Model model,
@@ -146,7 +146,7 @@ public class userProfileController {
         return new RedirectView(contextPath + "/productList/" + userId);
     }
 
-
+**/
     @GetMapping("/exchange_saved")
     public String exchangedFragment() {
         return "user_profile";
@@ -184,10 +184,13 @@ public class userProfileController {
        // model.addAttribute("newTopic", topicService.getTopicById(id));
          User currUser = userRepos.findByEmail(userEmail);
          Long userId = currUser.getId();
+        // ForumTopic currTopic = topicService.getTopicById(userId);
 
          model.addAttribute("user", currUser);
          model.addAttribute("userId", userId);
          model.addAttribute("newTopic", topicService.getTopicById(userId));
+
+        // currUser.setTopics(currTopic);
         return "user_profile";
      }
 

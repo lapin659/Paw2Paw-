@@ -1,6 +1,7 @@
 package com.webapp.paw2paw.controllers;
 
 import com.webapp.paw2paw.model.OrderHistory;
+import com.webapp.paw2paw.model.Product;
 import com.webapp.paw2paw.model.User;
 import com.webapp.paw2paw.model.UserProfile;
 import com.webapp.paw2paw.repository.OrderRepository;
@@ -75,7 +76,7 @@ public class buyProductController {
 
         model.addAttribute("buy", productService.getProductById(productId));
 
-
+        Product currProduct = productService.getProductById(productId);
         String orderProduct = productService.getProductById(productId).getProductName();
 
 
@@ -88,6 +89,7 @@ public class buyProductController {
         orderHistory.setOrderItem(orderProduct);
         orderHistory.setUser(currBuyer);
         orderHistory.setOrderId(Long.parseLong(productId));
+        orderHistory.setOrderPrice(currProduct.getPrice());
         //model.addAttribute("loggedUser", u);
         orderRepo.save(orderHistory);
         userRepo.save(currBuyer);

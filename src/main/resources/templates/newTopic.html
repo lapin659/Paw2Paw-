@@ -54,8 +54,10 @@ layout:decorator="layout/outline">
                         <h5 class="mb-1" style="color:#e68534;" th:text="${topic.getTitle()}">Topic's Title</h5>
                         <small th:text="${topic.showTimestamp()}"> timestamp </small>
                     </div>
-                    <a th:href="@{'/user_profile/'+ ${topic.getUser().getUsername()}}"
-                       class="badge rounded-pill text-bg-warning">Username</a>
+                    <!--  -->
+                    <a th:href="@{'/user_profile/'+ ${topic.getUser().getUsername()}}">Username</a>
+
+                    <p class= "mb-1" th:text="${topic.getUser().getUsername()}"> Username </p>
                     <p class="mb-1" th:text= "${topic.getContent()}">Content</p>
 
                 </a>

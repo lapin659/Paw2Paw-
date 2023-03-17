@@ -32,6 +32,17 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<OrderHistory> orders;
 
+    @OneToMany(mappedBy = "user")
+    private List<ForumTopic> topics;
+
+    public List<ForumTopic> getTopics() {
+        return topics;
+    }
+
+    public void setTopics(List<ForumTopic> topics) {
+        this.topics = topics;
+    }
+
     public List<OrderHistory> getOrders() {
         return orders;
     }
