@@ -28,7 +28,8 @@
                <td>
                    <div th:text="${session.currEmail}"></div>
                    <p class="card-text"
-                      th:text = " '$' + ${currOrder.getOrderPrice()}"></p>
+                      th:text = " '$' + ${buy.getPrice()}"></p>
+                   <input type="hidden" name="orderPrice" th:value="${buy.getPrice()}"/>
                </td>
            </tr>
        </div>

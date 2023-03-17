@@ -33,16 +33,16 @@
     <th:block th:each="currOrder: ${currOrders}">
         <tr>
             <td th:text="${currOrder.getOrderItem()}">Order Name</td>
+            <td th:text="${currOrder.getOrderId()}">Order Id</td>
             <td th:text="${currOrder.getUser().getUsername()}">User Name</td>
             <td th:text="${currOrder.getBuyerMessage()}">Buyer Message</td>
-            <td th:text="${currOrder.getOrderId()}">Order Id</td>
             <td th:text="${currOrder.getOrderPrice()}">Order Price</td>
         </tr>
     </th:block>
      </tbody>
 </table>
 
-
+$
 <!--
 <div th:object="${myOrders}"  >order history</div>
 -->
@@ -53,9 +53,12 @@
     <h3 style="color:#e68534;">Order History</h3>
     <form th:action="@{/user_profile}" method = "post">
     <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1" style="color:#e68534;">Order 001</h5>
-            <small>3 days ago</small>
+        <div class="d-flex w-100 justify-content-between"
+             th:each="currOrder: ${currOrders}">
+            <h5 class="mb-1" style="color:#e68534;" th:text= " 'Order #' + ${currOrder.getOrderId()}">Order 001</h5>
+            <h5 class="mb-1" th:text="${currOrder.getOrderItem()}">Order Name</h5>
+            <small th:text= " '$' + ${currOrder.getOrderPrice()}">Order Price</small>
+
         </div>
         <p class="mb-1" >Order Details</p>
         <small>Order Status: </small>
