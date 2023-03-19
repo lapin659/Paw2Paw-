@@ -22,32 +22,33 @@
         <nav class="navbar navbar-light bg-light">
             <a class="navbar-brand" href="homepage.html" style="color:#e68534;">Paw2Paw</a>
             <a class="navbar-brand" th:href="@{/user_profile}" style="color:#e68534;">My Account</a>
+            <a class="navbar-brand disabled" th:text="${customer}" style="color:#e68534;"  ></a>
         </nav>
 
 
     <div class="card border-success mb-3" style="max-width: 18rem;">
         <div class="card-header bg-transparent border-success" >Exchange Confirmation</div>
-       <div class="card-body">
+       <h5 class="card-body">
 
            <tr>
-               <td th:fragment="ordered">
-                   <div th:text="${orders[1].orderItem}"></div>
-                   <div th:text="${orders[1].exchangeItem}"></div>
-                   <!--                <div th:text="${exchangeOrder.orderItem}"> item name</div>
-
-
-                                                      <h5 class="card-title" th:text= "${exchange.productName}">Exchange product name</h5>
-                                   -->
+               <td>
+                   <h6 class="card-body" style="color:#e68534"
+                       th:text=" 'Confirmation Number #' + ${exchangeOrder.getOrderId()}"></h6>
+                   <div >You traded</div>
+                   <h6 class="card-body" style="color:#e68534"
+                       th:text= "${exchangeOrder.exchangeItem}"></h6>
+                   <div>for a</div>
+                   <h6 class="card-body" style="color:#e68534"
+                       th:text= "${exchangeOrder.orderItem}"></h6>
                </td>
-
            </tr>
+       </h5>
        </div>
       <br/>
                 <br/>
                 <br/>
         <p class="card-text">Your Message to the seller: </p>
-                <textarea class="form-control" id="buyerMessage" rows="3" th:text="${exchangeOrder.buyerMessage}"  ></textarea>
-
+                <textarea class="form-control" id="buyerMessage" rows="3" th:text="${exchangeOrder.buyerMessage}"></textarea>
     </div>
     </form>
 </div>

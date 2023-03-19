@@ -12,7 +12,7 @@ public class OrderHistory {
     @Column(name = "ID", length = 10)
     private Long orderId;
 
-    @Column(name = "OrderItem", length = 20)
+    @Column(name = "OrderItem")
     private String orderItem;
 
     @Column(name = "OrderPrice", length = 10)
@@ -23,7 +23,7 @@ public class OrderHistory {
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "userId")
     private User user;
-    @Column(name = "exchangeItem", length = 30)
+    @Column(name = "exchangeItem")
     private String exchangeItem;
     @Column(name = "buyerMessage", length = 128)
     private String buyerMessage;

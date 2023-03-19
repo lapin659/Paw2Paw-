@@ -17,28 +17,33 @@
 
 </div>
 <div xmlns:th="http://www.thymeleaf.org">
-   <form th:action="@{/exchange}" th:object="${exchangeOrder}" method="post">
+   <form th:action="@{/exchange}" th:object="${currOrder}" method="post">
        <br/>
         <label th:text= "${exchange.productName}" style="color:#e68534;"> </label>
+       <input type="hidden" name="orderItem" th:value="${exchange.productName}"/>
         <br/>
             <legend class="col-form-label col-sm-2 pt-0">Select item to exchange with</legend>
             <div class="col-sm-10">
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
                     <label class="form-check-label" for="gridRadios1" th:text = "${exchange.description}">
+                        <input type="hidden" name="exchangeItem" th:value="${exchange.description}"/>
                     </label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                    <label class="form-check-label" for="gridRadios2">
+                    <label class="form-check-label" for="gridRadios2" th:field="*{exchangeItem}">
                         Other, please specify below
+                        <input type="hidden" name="exchangeItem" th:value="${exchange.description}"/>
                     </label>
+
                 </div>
                 <br/>
                 <label th:text = "'Message  '+ ${exchange.seller}" >  </label>
                 <br/>
                 <textarea class="form-control" id="exchangeMessage" rows="3" th:field="*{buyerMessage}" ></textarea>
          </div>
+       <input type="hidden" name="userId" th:value="${currUser.getId()}"/>
         <button type="submit" class="btn btn-warning text-center" > Confirm Exchange</button>
    </form>
 </div>

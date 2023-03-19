@@ -107,7 +107,7 @@ public class buyProductController {
 
     @PostMapping("/buy")
     public String newOrder(@ModelAttribute OrderHistory buyOrder, Model model,
-                           HttpSession session, HttpServletRequest request,
+                           HttpServletRequest request,
                            @RequestParam("userId") Long userId){
         //String customerEmail = (String) session.getAttribute("currEmail");
 
