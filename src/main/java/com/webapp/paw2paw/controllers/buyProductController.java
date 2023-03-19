@@ -114,7 +114,7 @@ public class buyProductController {
        // orderService.addOrder(buyOrder, userRepo.findByEmail(customerEmail));
 
 
-        orderRepo.save(buyOrder);
+       // orderRepo.save(buyOrder);
 
         model.addAttribute("buyOrder", buyOrder);
 

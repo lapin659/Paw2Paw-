@@ -27,44 +27,28 @@
         <a class="navbar-brand" href="homepage.html" style="color:#e68534;" id="logoutPage" >Log Out</a>
     </nav>
 
-/
-<table class="striped bordered centered">
-    <tbody>
-    <th:block th:each="currOrder: ${currOrders}">
-        <tr>
-            <td th:text="${currOrder.getOrderItem()}">Order Name</td>
-            <td th:text="${currOrder.getOrderId()}">Order Id</td>
-            <td th:text="${currOrder.getUser().getUsername()}">User Name</td>
-            <td th:text="${currOrder.getBuyerMessage()}">Buyer Message</td>
-            <td th:text="${currOrder.getOrderPrice()}">Order Price</td>
-        </tr>
-    </th:block>
-     </tbody>
-</table>
-
-$
 <!--
 <div th:object="${myOrders}"  >order history</div>
 -->
 <div class="container">
+    <form th:action="@{/user_profile}" method = "post">
     <div class ="row align-items-start">
         <div class = "col">
 <div class="list-group">
     <h3 style="color:#e68534;">Order History</h3>
-    <form th:action="@{/user_profile}" method = "post">
-    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+
         <div class="d-flex w-100 justify-content-between"
              th:each="currOrder: ${currOrders}">
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
             <h5 class="mb-1" style="color:#e68534;" th:text= " 'Order #' + ${currOrder.getOrderId()}">Order 001</h5>
             <h5 class="mb-1" th:text="${currOrder.getOrderItem()}">Order Name</h5>
             <small th:text= " '$' + ${currOrder.getOrderPrice()}">Order Price</small>
-
-        </div>
-        <p class="mb-1" >Order Details</p>
+        <!--
+                <p class="mb-1" >Order Details</p>
         <small>Order Status: </small>
-
-
-    </a>
+        -->
+            </a>
+        </div>
     <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1" style="color:#e68534;" >Exchange Order 002</h5>
@@ -78,9 +62,12 @@ $
             <h5 class="mb-1"style="color:#e68534;">Exchange order 003</h5>
             <small class="text-muted">7 days ago</small>
         </div>
-        <p class="mb-1">Exchange order details</p>
+        <p class="mb-1">Exchange messages</p>
+        <!--
         <small class="text-muted">Order Status: </small>
+        -->
     </a>
+
     </form>
 </div>
 </div>
