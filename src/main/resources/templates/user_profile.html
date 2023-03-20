@@ -40,7 +40,7 @@
         <div class="d-flex w-100 justify-content-between"
              th:each="currOrder: ${currOrders}">
             <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-            <h5 class="mb-1" style="color:#e68534;" th:text= " 'Order #' + ${currOrder.getOrderId()}">Order 001</h5>
+            <h5 class="mb-1" style="color:#e68534;" th:text= " 'Purchase Order #' + ${currOrder.getOrderId()}">Order 001</h5>
             <h5 class="mb-1" th:text="${currOrder.getOrderItem()}">Order Name</h5>
             <small th:text= " '$' + ${currOrder.getOrderPrice()}">Order Price</small>
         <!--
@@ -49,25 +49,27 @@
         -->
             </a>
         </div>
-    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1" style="color:#e68534;" >Exchange Order 002</h5>
-            <small class="text-muted">5 days ago</small>
+
+        <div class="d-flex w-100 justify-content-between"
+        th:each="currExchange: ${currExchanges}">
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+            <h5 class="mb-1" style="color:#e68534;" th:text= " 'Exchange Order #' + ${currExchange.getOrderId()}">Exchange Order 002</h5>
+                <h5 class="mb-1" th:text="${currExchange.getOrderItem()}">Order Item  Name</h5>
+        <p class="mb-1" th:text="${currExchange.getExchangeItem()}">Item traded</p>
+        </a>
         </div>
-        <p class="mb-1">Exchange order details</p>
-        <small class="text-muted">Order Status: </small>
-    </a>
+    <!--
     <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1"style="color:#e68534;">Exchange order 003</h5>
             <small class="text-muted">7 days ago</small>
         </div>
         <p class="mb-1">Exchange messages</p>
-        <!--
-        <small class="text-muted">Order Status: </small>
-        -->
-    </a>
 
+        <small class="text-muted">Order Status: </small>
+
+    </a>
+    -->
     </form>
 </div>
 </div>

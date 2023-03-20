@@ -64,22 +64,23 @@ public class userProfileController {
 
             if (!curr.getOrders().isEmpty()){
                 List<OrderHistory> currOrders = curr.getOrders();
-                model.addAttribute("currOrders", currOrders);
-            }else{
-
+                if(currOrders.get(0).getOrderPrice() != 0.0){
+                    model.addAttribute("currOrders", currOrders);
+                } else{
+                    model.addAttribute("currExchanges", currOrders);
+                }
                 model.addAttribute("nullOrder", new OrderHistory());
-
             }
-
 
             model.addAttribute("myOrders", orderService.findUserOrder(curr));
             //return list of orderhistory
             model.addAttribute("currUser", curr);
             userRepos.save(curr);
-        } else {
+            } else {
             model.addAttribute("cru", new User());
 
         }
+
 
         return "user_profile";
 
@@ -146,14 +147,10 @@ public class userProfileController {
         return new RedirectView(contextPath + "/productList/" + userId);
     }
 
-**/
-    @GetMapping("/exchange_saved")
-    public String exchangedFragment() {
-        return "user_profile";
-    }
 
 
-    @PostMapping({"/exchange_saved", "/buy_saved"})
+
+    @PostMapping("/exchange_saved")
     public String showExchangeHistory(@ModelAttribute OrderHistory orderHistory, Model model,
                                       Principal principal, User user) {
         String exchangeItem = orderHistory.getExchangeItem();
@@ -162,18 +159,17 @@ public class userProfileController {
         model.addAttribute("currUser", user);
         //model.addAttribute("currU", new User());
 
-
         return "user_profile";
     }
 
-
+**/
     @PostMapping("/buy_saved")
-    public String showBuyHistory(@ModelAttribute OrderHistory orderHistory, Model model, Principal principal, User user) {
+    public String showBuyHistory(@ModelAttribute OrderHistory orderHistory, Model model,
+                                 Principal principal, User user) {
         String buyItem = orderHistory.getOrderItem();
         model.addAttribute("buyItem", buyItem);
         String currEmail = principal.getName();
         model.addAttribute("currUser", user);
-        //model.addAttribute("currU", new User());
         return "user_profile";
     }
 
