@@ -37,7 +37,7 @@
                 <label th:text = "'Message  '+ ${buy.seller} + ' (the seller)'"  >  </label>
                 <br/>
                 <br/>
-                <textarea class="form-control" id="message" rows="3" name="buyerMessage"
+                <textarea class="form-control" id="message" rows="3" name="buyerMessage" style="white-space:pre-wrap"
                           th:field="*{buyerMessage}"  ></textarea>
        <br/>
        <input type="hidden" name="userId" th:value="${currBuyer.getId()}"/>

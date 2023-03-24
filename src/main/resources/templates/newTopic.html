@@ -16,49 +16,37 @@ layout:decorator="layout/outline">
      -->
 </head>
 <body>
+<div class="container text-center">
+</div>
     <div xmlns:th="http://www.thymeleaf.org">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light static-top" style="background-color:#e68534;">
-            <div class="container">
-                <a class="navbar-brand" th:href= "@{/forum.html}" style="color:#e68534;">Community</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                        aria-controls="navbarResponsive"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/">Home</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" th:href= "@{/login}">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/register}">Register</a>
-                        </li>
-
-                    </ul>
-                </div>
-            </div>
+        <nav class="navbar navbar-light bg-light" style="background-color:#e68534;">
+            <a class="navbar-brand" href="homepage.html" style="color:#e68534;">Home</a>
+            <a class="navbar-brand" th:href= "@{/forum.html}" style="color:#e68534;">Community</a>
+            <a class="navbar-brand" th:href="@{/user_profile}" style="color:#e68534;"
+                   th:text="${topic.getUser().getUsername()}">My Account</a>
         </nav>
         <div class="list-group">
             <!--
             <h3 style="color:#e68534;">Order History</h3>
             <form th:action="@{/order}" th:object="${myOrders}">
             -->
-            <form>
+            <form th:action="@{/user_profile}"  method="post">
                 <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1" style="color:#e68534;" th:text="${topic.getTitle()}">Topic's Title</h5>
+                        <button type="button" class="btn btn-outline-warning float-right"
+                                th:text="${topic.getUser().getUsername()}"> Username </button>
                         <small th:text="${topic.showTimestamp()}"> timestamp </small>
+
+
+
                     </div>
                     <!--  -->
                     <a th:href="@{'/user_profile/'+ ${topic.getUser().getUsername()}}">Username</a>
 
-                    <p class= "mb-1" th:text="${topic.getUser().getUsername()}"> Username </p>
-                    <p class="mb-1" th:text= "${topic.getContent()}">Content</p>
+
+                    <p class="mb-1" style="white-space:pre-wrap"
+                       th:text= "${topic.getContent()}">Content</p>
 
                 </a>
             </form>

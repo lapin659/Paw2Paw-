@@ -62,11 +62,11 @@ public class userProfileController {
             //find order by  user id
 
 
-            if (!curr.getOrders().isEmpty()){
+            if (!curr.getOrders().isEmpty()) {
                 List<OrderHistory> currOrders = curr.getOrders();
-                if(currOrders.get(0).getOrderPrice() != 0.0){
+                if (currOrders.get(0).getOrderPrice() != 0.0) {
                     model.addAttribute("currOrders", currOrders);
-                } else{
+                } else {
                     model.addAttribute("currExchanges", currOrders);
                 }
                 model.addAttribute("nullOrder", new OrderHistory());
@@ -76,7 +76,16 @@ public class userProfileController {
             //return list of orderhistory
             model.addAttribute("currUser", curr);
             userRepos.save(curr);
-            } else {
+
+            if (!curr.getTopics().isEmpty()) {
+                List<ForumTopic> currTopics = curr.getTopics();
+                model.addAttribute("currTopics", currTopics);
+            }
+            model.addAttribute("nullTopic", new ForumTopic());
+
+            //model.addAttribute("myTopics", topicService.getTopicByUser(curr.getUsername()));
+
+        } else {
             model.addAttribute("cru", new User());
 
         }

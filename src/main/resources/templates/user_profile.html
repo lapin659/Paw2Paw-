@@ -13,7 +13,6 @@
 <body>
 <!--ADD order/exchange history, nav bar, reformat profile photo, display username   -->
     <nav class="navbar navbar-light bg-light">
-
         <a class="navbar-brand" href="#" >
             <img alt="" th:src="@{'/images/' + ${currUser.username} + '.jpg'}" width="50" height="50" class="d-inline-block align-top">
             <span class="navbar-band mb-0 h3 mx-lg-auto ml-lg-auto" style="color:#e68534;" th:text="${currUser.username}"> </span>
@@ -34,7 +33,7 @@
     <form th:action="@{/user_profile}" method = "post">
     <div class ="row align-items-start">
         <div class = "col">
-<div class="list-group">
+    <div class="list-group">
     <h3 style="color:#e68534;">Order History</h3>
 
         <div class="d-flex w-100 justify-content-between"
@@ -58,18 +57,6 @@
         <p class="mb-1" th:text="${currExchange.getExchangeItem()}">Item traded</p>
         </a>
         </div>
-    <!--
-    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1"style="color:#e68534;">Exchange order 003</h5>
-            <small class="text-muted">7 days ago</small>
-        </div>
-        <p class="mb-1">Exchange messages</p>
-
-        <small class="text-muted">Order Status: </small>
-
-    </a>
-    -->
     </form>
 </div>
 </div>
@@ -77,15 +64,19 @@
 
     <div class="col">
     <div class="list-group">
-        <h3 style="color:#e68534;">Group Message</h3>
-        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start ">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1" style="color:#e68534;">Thread 001 </h5>
-            <small>3 days ago</small>
-        </div>
-        <p class="mb-1">Message details</p>
-        <small>last replied by User A</small>
+        <h3 style="color:#e68534;">Topics and Replies</h3>
+        <div class="d-flex w-100 justify-content-between"
+             th:each="currTopic: ${currTopics}">
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start ">
+                <h5 class="mb-1" style="color:#e68534;" th:text= " 'Topic #' + ${currTopic.getId()}">
+                    Topic #</h5>
+
+                <h5 class="mb-1" th:text="${currTopic.getTitle()}">Topic Title</h5>
+                <p class="mb-1" th:text="${currTopic.getContent()}">Message details</p>
+                <small>last replied by User A</small>
+                <small class="float-right" th:text="${currTopic.getTimeStamp()}">3 days ago</small>
         </a>
+        </div>
     </div>
     </div>
 
@@ -102,7 +93,7 @@
     </div>
     <div class="mb-3">
         <label for= "content" class="form-label">Content</label>
-        <textarea class="form-control" name="content" > </textarea>
+        <textarea class="form-control" name="content" style="white-space:pre-wrap"> </textarea>
     </div>
           <!--do not delete the above, or raises 400 request param not present-->
           <input type="hidden" name="userId" th:value="${currUser.getId()}"/>
@@ -112,18 +103,5 @@
 
 </div>
 
-<!--
-<p th:text="${submission.exchangeItem}">   </p>
-
-    <div class="container text-center">
-
-        <h3 style="color:#e68534;" >Welcome, <span class="username" th:text="${currUsername}" style="color:#e68534;" >Guest</span> </h3>
-        <div sec:authorize = "isAuthenticated()"> <span sec:authentication="name" ></span> </div>
-            <span class="profile-pic">
-                <img alt="" th:src="@{'/images/' + ${currUsername} + '.jpg'}" height="40" width="40">
-            </span>
-        <div th:text="${exchangeItem}"> exchange history  </div>
-
-    </div> -->
 </body>
 </html>

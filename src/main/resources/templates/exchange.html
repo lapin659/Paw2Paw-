@@ -41,7 +41,8 @@
                 <br/>
                 <label th:text = "'Message  '+ ${exchange.seller}" >  </label>
                 <br/>
-                <textarea class="form-control" id="exchangeMessage" rows="3" th:field="*{buyerMessage}" ></textarea>
+                <textarea class="form-control" id="exchangeMessage" rows="3" style="white-space:pre-wrap"
+                          th:field="*{buyerMessage}" ></textarea>
          </div>
        <input type="hidden" name="userId" th:value="${currUser.getId()}"/>
         <button type="submit" class="btn btn-warning text-center" > Confirm Exchange</button>
