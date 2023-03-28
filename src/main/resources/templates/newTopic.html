@@ -25,32 +25,32 @@ layout:decorator="layout/outline">
             <a class="navbar-brand" th:href="@{/user_profile}" style="color:#e68534;"
                    th:text="${topic.getUser().getUsername()}">My Account</a>
         </nav>
-        <div class="list-group">
             <!--
             <h3 style="color:#e68534;">Order History</h3>
             <form th:action="@{/order}" th:object="${myOrders}">
             -->
             <form th:action="@{/user_profile}"  method="post">
-                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1" style="color:#e68534;" th:text="${topic.getTitle()}">Topic's Title</h5>
-                        <button type="button" class="btn btn-outline-warning float-right"
-                                th:text="${topic.getUser().getUsername()}"> Username </button>
-                        <small th:text="${topic.showTimestamp()}"> timestamp </small>
-
-
-
-                    </div>
-                    <!--  -->
-                    <a th:href="@{'/user_profile/'+ ${topic.getUser().getUsername()}}">Username</a>
-
-
-                    <p class="mb-1" style="white-space:pre-wrap"
+                        <header class="row">
+                            <h5 class="flow-text left" style="color:#e68534;" th:text="${topic.getTitle()}">Topic's Title</h5>
+                        </header>
+                        <section class="row">
+                            <div class="col s12">
+                                <a th:href= "@{/user_profile}">
+                                    <!--
+                                <button type="button" class="btn btn-outline-warning"
+                                -->
+                                    <span class="chip left"
+                                    th:text="${topic.getUser().getUsername()}"> Username
+                                    </span>
+                                </a>
+                                <span class="right" th:text="${topic.showTimestamp()}"> timestamp </span>
+                            </div>
+                        </section>
+                <section class="row">
+                    <p class ="col s12" style="text-align: justify; display:block; white-space:pre-wrap"
                        th:text= "${topic.getContent()}">Content</p>
-
-                </a>
+                </section>
             </form>
-        </div>
 
 
         <!--

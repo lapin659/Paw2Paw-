@@ -53,28 +53,21 @@
                     <tr>
                         <th scope="row"> 1</th>
                         <td th:text= "${topic.getTitle()}">Topic title</td>
-                        <td th:text="${topic.getUser().username}">UserA</td>
+                        <td>
+                            <a th:href= "@{/user_profile}">
+                            <button type="button" class="btn btn-warning btn-sm"
+                                    th:text="${topic.getUser().username}">UserA</button>
+                            </a>
+                        </td>
                         <td th:text="${topic.getTimeStamp()}">Timestamp 1</td>
                         <td>
                             <a th:href="@{'/newTopic/' + ${topic.getId()}}" class = "btn btn-outline-warning">Thread</a>
-                      </td>
+                        </td>
                     </tr>
                       </div>
-                  </div>
+                   </div>
                   </tbody>
                   </table>
 
-                        <!--    <td th:text= "${topic.title}">Topic's title</td>
-                     <th scope="row" >Topic Title</th>
-                     -->
-
-      <!--
-                            <td>
-                                <p th:text= "${listedtopic.title}"></p>
-                                <p th:text= "${listedtopic.id}">T</p>
-
-                         <p th:text= "${listedtopic.user}">Topic Title</p>
-
-      -->
 </body>
 </html>
