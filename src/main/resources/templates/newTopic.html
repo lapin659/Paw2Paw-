@@ -50,6 +50,58 @@ layout:decorator="layout/outline">
                     <p class ="col s12" style="text-align: justify; display:block; white-space:pre-wrap"
                        th:text= "${topic.getContent()}">Content</p>
                 </section>
+
+                <!-- ANSWER -->
+                <header class="row">
+                    <div class="col s12">
+                        <blockquote class="flow-text left" th:text="|Replies: | + ${replies.size()}">Number of answers</blockquote>
+                    </div>
+                </header>
+
+                <section class="row">
+                    <div class="col s12" th:each="reply : ${replies}">
+                        <a th:href="@{/user_profile}">
+                        <span class="chip left" style="background-color: #f3f2f2;" th:text="${reply.getUser().getUsername()}">
+                            Answer's author
+                        </span>
+                        </a>
+                        <span class="right" th:text="${reply.getTimeStamp()}"></span>
+                        <span th:if="${topic.getUser().getUsername() == userName}">
+                        <form th:action="@{/newTopic/{topic.getId()}}" method="post">
+                            <input type="hidden" name="id_answer" th:value="${reply.getId()}"/>
+                            <input type="hidden" name="id_topic" th:value="${topic.getId()}"/>
+                            <button class="chip left" style="background-color: #37b7ab;">Set useful/useless</button>
+                        </form>
+                    </span>
+                        <span th:if="${reply.getUser().getUsername() == userName}">
+                        <form th:action="@{/newTopic/{topic.getId()}}" method="post">
+                            <input type="hidden" name="id_answer" th:value="${reply.getId()}"/>
+                            <input type="hidden" name="action" th:value="delete"/>
+                            <input type="hidden" name="id_topic" th:value="${topic.getId()}"/>
+                            <button class="chip left" style="background-color: #37b7ab;">Delete</button>
+                        </form>
+                    </span>
+                        <div class="row">
+                            <p class="col s12" style="text-align: justify; display:block; white-space:pre-wrap"
+                               th:text="${reply.getContent()}">
+                                Answer's content
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
             </form>
 
 
