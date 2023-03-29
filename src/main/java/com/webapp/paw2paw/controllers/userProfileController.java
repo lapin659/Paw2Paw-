@@ -80,6 +80,7 @@ public class userProfileController {
             if (!curr.getTopics().isEmpty()) {
                 List<ForumTopic> currTopics = curr.getTopics();
                 model.addAttribute("currTopics", currTopics);
+
             }
             model.addAttribute("nullTopic", new ForumTopic());
 

@@ -19,8 +19,6 @@ public class Reply {
 
     private LocalDateTime timeStamp;
 
-    @Column(length = 1024)
-    private String code;
 
     @ManyToOne
     @JoinColumn(name = "id_user")

@@ -16,6 +16,19 @@ public class ProductService {
 
         return listOfProducts;
     }
+
+
+    public List<Product> getSecondProducts(){
+        List<Product> secondProducts = new ArrayList<>();
+        secondProducts.add(new Product("126", "Cat deworm pills", "proof of prescription needed ", 5, "Cat person B"));
+        secondProducts.add(new Product("127", "Aquarium", "charity donation ", 0, "Fish person A"));
+        secondProducts.add(new Product("128", "Bird litter", "bird shampoo (used ok)", 12, "Bird person A"));
+
+        return secondProducts;
+    }
+
+
+
     public  Product getProductById(String productId) {
 
         Predicate<Product> byId = p -> p.getProductId().equals(productId);

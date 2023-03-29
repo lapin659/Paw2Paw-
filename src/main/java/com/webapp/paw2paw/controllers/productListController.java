@@ -24,6 +24,9 @@ public class productListController {
     public String listProducts(Model model){
         List<Product> listProducts = productService.getAllProducts();
         model.addAttribute("products", listProducts);
+
+        List<Product> secondListProducts = productService.getSecondProducts();
+        model.addAttribute("productsB", secondListProducts);
         return "productList";
     }
 

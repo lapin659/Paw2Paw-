@@ -40,7 +40,7 @@
               <table class="table table-striped">
                   <thead>
                   <tr>
-                      <th scope="col">Answers</th>
+                      <th scope="col">Replies</th>
                       <th scope="col">Title</th>
                       <th scope="col">Author</th>
                       <th scope="col">Created</th>
@@ -51,7 +51,9 @@
                   <div class="row" xmlns:th="http://www.thymeleaf.org">
                       <div th:each="topic, stat:${allTopics}">
                     <tr>
-                        <th scope="row"> 1</th>
+                        <td th:text="${replyRepository.countRepliesByTopic_topicId(topic.getId())}" >
+                            Number of Replies
+                        </td>
                         <td th:text= "${topic.getTitle()}">Topic title</td>
                         <td>
                             <a th:href= "@{/user_profile}">

@@ -2,6 +2,7 @@ package com.webapp.paw2paw.controllers;
 
 
 import com.webapp.paw2paw.model.ForumTopic;
+import com.webapp.paw2paw.repository.ReplyRepository;
 import com.webapp.paw2paw.repository.TopicRepository;
 import com.webapp.paw2paw.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,12 @@ import java.util.List;
 @Controller
 public class forumController {
     private final TopicRepository topicRepository;
+    private final ReplyRepository replyRepository;
+
     @Autowired
-    public forumController(TopicRepository topicRepository) {
+    public forumController(TopicRepository topicRepository, ReplyRepository replyRepository) {
         this.topicRepository = topicRepository;
+        this.replyRepository = replyRepository;
     }
     @Autowired
     private TopicService topicService;
@@ -41,6 +45,7 @@ public String displayTopics(Model m){
         //model.addAttribute("listedtopics", listTopics);
         List<ForumTopic> allTopics = topicRepository.findAll();
         model.addAttribute("allTopics", allTopics);
+        model.addAttribute("replyRepository", replyRepository);
         return "forum";
     }
 

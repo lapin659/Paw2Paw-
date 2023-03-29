@@ -68,7 +68,7 @@ layout:decorator="layout/outline">
                             Answer's author
                         </span>
                         </a>
-                        <span class="right" th:text="${reply.getTimeStamp()}"></span>
+                        <span class="right" th:text="${reply.showTimestamp()}"></span>
                         <span th:if="${topic.getUser().getUsername() == userName}">
                         <form th:action="@{/newTopic/{topic.getId()}}" method="post">
                             <input type="hidden" name="id_answer" th:value="${reply.getId()}"/>
