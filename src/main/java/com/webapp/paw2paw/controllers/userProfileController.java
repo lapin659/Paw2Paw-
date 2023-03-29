@@ -208,6 +208,7 @@ public class userProfileController {
                                  HttpServletRequest request) {
 
         ForumTopic topic = new ForumTopic();
+        topic.setId(userId + userId);
         topic.setContent(content);
         topic.setTitle(title);
         topic.setTimeStamp(LocalDateTime.now());

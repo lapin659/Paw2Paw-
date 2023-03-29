@@ -17,6 +17,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -36,17 +37,25 @@ public class newTopicController {
     @GetMapping("newTopic/{id}")
     public String showNewTopic(@PathVariable String id, Model model, Principal principal){
         if(!principal.getName().isEmpty()) {
-            String userName = principal.getName();
+            String userEmail = principal.getName();
+            String userName = userRepo.findByEmail(userEmail).getUsername();
             //  Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             //   String userName = ((UserDetails)principal).getUsername();
-
+          //  Long userId = userRepo.findByUsername(userName).getId();
             ForumTopic topic = topicRepo.findTopicById(Long.valueOf(id));
-            List<Reply> replies = replyRepo.findReplyByTopic_topicId(Long.valueOf(id));
-            topicRepo.save(topic);
+          //  if (!replyRepo.findReplyByTopic_topicId(Long.valueOf(id)).isEmpty()) {
+                List<Reply> replies = replyRepo.findReplyByTopic_topicId(Long.valueOf(id));
+            //    topic.setAnswers(replies);
+                model.addAttribute("replies", replies);
 
+           // model.addAttribute("nullReply", new Reply());
+
+
+            //topicRepo.save(topic);
             model.addAttribute("topic", topic);
+            //model.addAttribute("userId", userId);
             model.addAttribute("userName", userName);
-            model.addAttribute("replies", replies);
+
         }else{
             model.addAttribute("newUser", new User());
         }
@@ -54,11 +63,35 @@ public class newTopicController {
 
     }
 
+    /**
     @PostMapping("newTopic/{id}")
     public RedirectView updateTopic(@RequestParam String topic_Id, HttpServletRequest request) {
         String contextPath = request.getContextPath();
         return new RedirectView(contextPath + "/newTopic/" + topic_Id);
     }
+**/
+    @PostMapping("newTopic")
+    public RedirectView addAnswer(@RequestParam("content") String content,
+                                  @RequestParam("id_topic") String id_topic,
+                                  @RequestParam("userName") String userName,
+                                  HttpServletRequest request) {
+       // Long userId = userRepo.findByUsername(userName).getId();
+        Reply reply= new Reply();
+        reply.setContent(content);
+
+        reply.setTimeStamp(LocalDateTime.now());
+        reply.setTopic(topicRepo.findTopicById(Long.valueOf(id_topic)));
+        reply.setUser(userRepo.findByUsername(userName));
+
+        replyRepo.save(reply);
+        String contextPath = request.getContextPath();
+        return new RedirectView(contextPath + "/newTopic/" + id_topic);
+    }
+
+
+
+
+
 
 
 }

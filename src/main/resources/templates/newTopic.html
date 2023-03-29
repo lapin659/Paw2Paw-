@@ -29,11 +29,14 @@ layout:decorator="layout/outline">
             <h3 style="color:#e68534;">Order History</h3>
             <form th:action="@{/order}" th:object="${myOrders}">
             -->
-            <form th:action="@{/user_profile}"  method="post">
+
                         <header class="row">
                             <h5 class="flow-text left" style="color:#e68534;" th:text="${topic.getTitle()}">Topic's Title</h5>
                         </header>
                         <section class="row">
+                          <!--
+                            <form th:action="@{/user_profile}"  method="post">
+                            -->
                             <div class="col s12">
                                 <a th:href= "@{/user_profile}">
                                     <!--
@@ -61,7 +64,7 @@ layout:decorator="layout/outline">
                 <section class="row">
                     <div class="col s12" th:each="reply : ${replies}">
                         <a th:href="@{/user_profile}">
-                        <span class="chip left" style="background-color: #f3f2f2;" th:text="${reply.getUser().getUsername()}">
+                        <span class="col col-sm-12" th:text="${reply.getUser().getUsername()}">
                             Answer's author
                         </span>
                         </a>
@@ -70,7 +73,6 @@ layout:decorator="layout/outline">
                         <form th:action="@{/newTopic/{topic.getId()}}" method="post">
                             <input type="hidden" name="id_answer" th:value="${reply.getId()}"/>
                             <input type="hidden" name="id_topic" th:value="${topic.getId()}"/>
-                            <button class="chip left" style="background-color: #37b7ab;">Set useful/useless</button>
                         </form>
                     </span>
                         <span th:if="${reply.getUser().getUsername() == userName}">
@@ -93,6 +95,33 @@ layout:decorator="layout/outline">
 
 
 
+                <header class="row">
+                    <div class="col s12">
+                        <blockquote class="flow-text left" th:text="|Reply: |">Reply</blockquote>
+                    </div>
+                </header>
+                <section>
+                    <form th:action="@{/newTopic}" method="post">
+                        <div class="row">
+                            <div class="col s12">
+                                <label>Content:
+                                    <textarea name="content" class="materialize-textarea" minlength="5" maxlength="1024"
+                                              data-length="1024" required="required"></textarea>
+                                </label>
+                            </div>
+                        </div>
+                        <input type="hidden" name="id_topic" th:value="${topic.getId()}"/>
+                        <input type="hidden" name="userName" th:value="${userName}"/>
+                        <div class="row">
+                            <div class="col s12 center">
+                                <button class="btn-warning" type="submit" name="answer">Answer</button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+
+
+
 
 
 
@@ -105,12 +134,6 @@ layout:decorator="layout/outline">
             </form>
 
 
-        <!--
-        <form th:action="@{/newTopic}" th:object="${topic}" method="post"  >
-        <input type="hidden" name="id_topic" th:value="${topic.getTitle()}"/>
-        <input type="hidden" name="id_content" th:value="${topic.getContent()}"/>
-        </form>
-    -->
 
 
 </div>
