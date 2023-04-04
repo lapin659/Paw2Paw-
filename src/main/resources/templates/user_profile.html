@@ -26,45 +26,43 @@
         <a class="navbar-brand" href="homepage.html" style="color:#e68534;" id="logoutPage" >Log Out</a>
     </nav>
 
-<!--
-<div th:object="${myOrders}"  >order history</div>
--->
 <div class="container">
     <form th:action="@{/user_profile}" method = "post">
-    <div class ="row align-items-start">
-        <div class = "col">
-    <div class="list-group">
-    <h3 style="color:#e68534;">Order History</h3>
-
+        <div class ="row align-items-start">
+            <div class = "col">
+                <div class="list-group">
+            <h3 style="color:#e68534;"> Order History</h3>
+             <hr/>
+        <!--
         <div class="d-flex w-100 justify-content-between"
              th:each="currOrder: ${currOrders}">
             <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
             <h5 class="mb-1" style="color:#e68534;" th:text= " 'Purchase Order #' + ${currOrder.getOrderId()}">Order 001</h5>
             <h5 class="mb-1" th:text="${currOrder.getOrderItem()}">Order Name</h5>
             <small th:text= " '$' + ${currOrder.getOrderPrice()}">Order Price</small>
-        <!--
-                <p class="mb-1" >Order Details</p>
-        <small>Order Status: </small>
-        -->
             </a>
         </div>
-
+        -->
         <div class="d-flex w-100 justify-content-between"
         th:each="currExchange: ${currExchanges}">
             <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-            <h5 class="mb-1" style="color:#e68534;" th:text= " 'Exchange Order #' + ${currExchange.getOrderId()}">Exchange Order 002</h5>
+            <h5 class="mb-1" style="color:#e68534;" th:text= " 'Order #' + ${currExchange.getOrderId()}"> Order 002</h5>
                 <h5 class="mb-1" th:text="${currExchange.getOrderItem()}">Order Item  Name</h5>
-        <p class="mb-1" th:text="${currExchange.getExchangeItem()}">Item traded</p>
+                <p class="mb-1" th:if="${currExchange.getExchangeItem()}" th:text=" 'Traded with a  ' + ${currExchange.getExchangeItem()}">
+                    Item traded</p>
+                <small th:if= "${currExchange.getOrderPrice()}" th:text= " '$' + ${currExchange.getOrderPrice()}" >Order Price</small>
+                <small th:if= "${currExchange.getBuyerMessage()}" th:text= "${currExchange.getBuyerMessage()}" >Buyer message</small>
         </a>
+        </div>
+                </div>
         </div>
     </form>
 </div>
-</div>
-    </div>
 
     <div class="col">
     <div class="list-group">
         <h3 style="color:#e68534;">Topics and Replies</h3>
+        <hr/>
         <div class="d-flex w-100 justify-content-between"
              th:each="currTopic: ${currTopics}">
             <a href="#" class="list-group-item list-group-item-action flex-column align-items-start ">
@@ -80,9 +78,7 @@
     </div>
     </div>
 
-    <!--  <a th:href="@{'/topics/user/' + ${currUser.getId()}}" style="display: block; color: #26a69a"></a>
---
-  -->
+
     <h3 style="color:#e68534;">Add a Topic</h3>
 
       <form th:action="@{/user_profile}" th:object="${newTopic}" method = "post">
@@ -98,9 +94,7 @@
           <!--do not delete the above, or raises 400 request param not present-->
           <input type="hidden" name="userId" th:value="${currUser.getId()}"/>
     <button type="submit" class = "btn btn-warning">Add Topic</button>
-
     </form>
-
 </div>
 
 </body>

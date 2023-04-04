@@ -64,15 +64,17 @@ public class userProfileController {
 
             if (!curr.getOrders().isEmpty()) {
                 List<OrderHistory> currOrders = curr.getOrders();
-                if (currOrders.get(0).getOrderPrice() != 0.0) {
+                /**
+                if (currOrders.get(0).getExchangeItem().isEmpty()) {
                     model.addAttribute("currOrders", currOrders);
                 } else {
+                 **/
                     model.addAttribute("currExchanges", currOrders);
-                }
+                }else{
                 model.addAttribute("nullOrder", new OrderHistory());
             }
 
-            model.addAttribute("myOrders", orderService.findUserOrder(curr));
+           model.addAttribute("myOrders", orderService.findUserOrder(curr));
             //return list of orderhistory
             model.addAttribute("currUser", curr);
             userRepos.save(curr);
@@ -216,8 +218,6 @@ public class userProfileController {
         topic.setUser(userRepos.getById(userId));
         topicRepos.save(topic);
         String contextPath = request.getContextPath();
-        // model.addAttribute("newTopic", topic);
-        //    return new RedirectView( contextPath +"/user_profile");
         return new RedirectView(contextPath + "/newTopic/" + userId);
     }
 

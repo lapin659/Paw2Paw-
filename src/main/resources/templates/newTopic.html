@@ -16,8 +16,7 @@ layout:decorator="layout/outline">
      -->
 </head>
 <body>
-<div class="container text-center">
-</div>
+<div class="container text-center"></div>
     <div xmlns:th="http://www.thymeleaf.org">
         <nav class="navbar navbar-light bg-light" style="background-color:#e68534;">
             <a class="navbar-brand" href="homepage.html" style="color:#e68534;">Home</a>
@@ -25,100 +24,96 @@ layout:decorator="layout/outline">
             <a class="navbar-brand" th:href="@{/user_profile}" style="color:#e68534;"
                    th:text="${topic.getUser().getUsername()}">My Account</a>
         </nav>
+    </div>
             <!--
             <h3 style="color:#e68534;">Order History</h3>
             <form th:action="@{/order}" th:object="${myOrders}">
             -->
 
-                        <header class="row">
-                            <h5 class="flow-text left" style="color:#e68534;" th:text="${topic.getTitle()}">Topic's Title</h5>
-                        </header>
-                        <section class="row">
-                          <!--
-                            <form th:action="@{/user_profile}"  method="post">
-                            -->
-                            <div class="col s12">
-                                <a th:href= "@{/user_profile}">
-                                    <!--
-                                <button type="button" class="btn btn-outline-warning"
-                                -->
-                                    <span class="chip left"
-                                    th:text="${topic.getUser().getUsername()}"> Username
-                                    </span>
-                                </a>
-                                <span class="right" th:text="${topic.showTimestamp()}"> timestamp </span>
+                     <div class="card border-warning mb-3 text-center" style="max-width: 1500px;">
+                            <a th:href= "@{/user_profile}">
+                            <div class="card-header" style="color:#e68534;" th:text="${topic.getUser().getUsername()}">
+                                Username</div>
+                            </a>
+                            <div class="card-body">
+                                <h3 class="card-title" th:text="${topic.getTitle()}">Topic title</h3>
+                                <p class="card-text" style="text-align: justify; display:block; white-space:pre-wrap"
+                                   th:text= "${topic.getContent()}">Content</p>
                             </div>
-                        </section>
-                <section class="row">
-                    <p class ="col s12" style="text-align: justify; display:block; white-space:pre-wrap"
-                       th:text= "${topic.getContent()}">Content</p>
-                </section>
+                         <div class="card-footer">
+                             <small class = "text-body-secondary" th:text="${topic.showTimestamp()}"> timestamp </small>
+                         </div>
+                     </div>
 
+                <hr/>
                 <!-- ANSWER -->
-                <header class="row">
-                    <div class="col s12">
-                        <blockquote class="flow-text left" th:text="|Replies: | + ${replies.size()}">Number of answers</blockquote>
-                    </div>
-                </header>
+                    <header class="row text-center">
+                        <div class="col s12">
+                            <button type="button" class="btn btn-warning text-center">
+                            <span class="badge text-dark text-bg-secondary" th:text="|Replies: | + ${replies.size()}">
+                            </span>
+                            </button>
+                        </div>
+                    </header>
 
-                <section class="row">
-                    <div class="col s12" th:each="reply : ${replies}">
-                        <a th:href="@{/user_profile}">
-                        <span class="col col-sm-12" th:text="${reply.getUser().getUsername()}">
-                            Answer's author
-                        </span>
-                        </a>
-                        <span class="right" th:text="${reply.showTimestamp()}"></span>
-                        <span th:if="${topic.getUser().getUsername() == userName}">
-                        <form th:action="@{/newTopic/{topic.getId()}}" method="post">
+            <hr/>
+
+                <div class="row row-cols-1 row-cols-md-2 g-4">
+                    <div class="col  text-center">
+                        <div class="card text-dark bg-light mb-3 text-center" th:each="reply: ${replies}">
+                            <a th:href="@{/user_profile}">
+                            <div class="card-header" style="color:#e68534;" th:text="${reply.getUser().getUsername()}">
+                                Answer's author
+                            </div>
+                            </a>
+                                <div class="card-body">
+                                <p class="card-text" style="text-align: justify; display:block; white-space:pre-wrap"
+                                   th:text="${reply.getContent()}">
+                                    Answer's content
+                                </p>
+                                </div>
+                                <div class="card-footer text-body-secondary" th:text="${reply.showTimestamp()}"></div>
+
+                            <span th:if="${topic.getUser().getUsername() == userName}">
+                            <form th:action="@{/newTopic/{topic.getId()}}" method="post">
                             <input type="hidden" name="id_answer" th:value="${reply.getId()}"/>
                             <input type="hidden" name="id_topic" th:value="${topic.getId()}"/>
-                        </form>
-                    </span>
-                        <span th:if="${reply.getUser().getUsername() == userName}">
-                        <form th:action="@{/newTopic/{topic.getId()}}" method="post">
+                            </form>
+                            </span>
+
+                            <span th:if="${reply.getUser().getUsername() == userName}">
+                            <form th:action="@{/newTopic/{topic.getId()}}" method="post">
                             <input type="hidden" name="id_answer" th:value="${reply.getId()}"/>
                             <input type="hidden" name="action" th:value="delete"/>
                             <input type="hidden" name="id_topic" th:value="${topic.getId()}"/>
+                            <!--
                             <button class="chip left" style="background-color: #37b7ab;">Delete</button>
+                            -->
                         </form>
-                    </span>
-                        <div class="row">
-                            <p class="col s12" style="text-align: justify; display:block; white-space:pre-wrap"
-                               th:text="${reply.getContent()}">
-                                Answer's content
-                            </p>
+                        </span>
                         </div>
                     </div>
-                </section>
+                </div>
 
 
-
-
-                <header class="row">
-                    <div class="col s12">
-                        <blockquote class="flow-text left" th:text="|Reply: |">Reply</blockquote>
-                    </div>
-                </header>
-                <section>
                     <form th:action="@{/newTopic}" method="post">
-                        <div class="row">
-                            <div class="col s12">
-                                <label>Content:
-                                    <textarea name="content" class="materialize-textarea" minlength="5" maxlength="1024"
-                                              data-length="1024" required="required"></textarea>
-                                </label>
+                        <div class="row text-center">
+                            <div class="col s12 text-center">
+                                    <textarea name="content" class="form-control " style="white-space:pre-wrap"
+                                              maxlength="1024" data-length="1024" required="required"></textarea>
                             </div>
                         </div>
+
                         <input type="hidden" name="id_topic" th:value="${topic.getId()}"/>
                         <input type="hidden" name="userName" th:value="${userName}"/>
-                        <div class="row">
-                            <div class="col s12 center">
-                                <button class="btn-warning" type="submit" name="answer">Answer</button>
+                        <div class="row text-center">
+                            <div class="col s12 text-center">
+                                <button type="submit"
+                                        class="btn btn-warning" name="answer">Reply</button>
                             </div>
                         </div>
                     </form>
-                </section>
+
 
 
 
