@@ -59,7 +59,7 @@ public class buyProductController {
     @PostMapping("/save_buy")
     public String exchangeSubmit(Model model,@ModelAttribute ("submission") OrderHistory submission){
 
-        orderRepo.save(submission);
+       // orderRepo.save(submission);
 
          model.addAttribute("buyItem", submission.getOrderItem());
          model.addAttribute("message",submission.getBuyerMessage());
@@ -98,7 +98,6 @@ public class buyProductController {
         model.addAttribute("userId", userId);
         model.addAttribute("orderProduct", orderProduct);
         model.addAttribute("currOrder", orderHistory);
-      //  model.addAttribute("currOrders", orderService);
         session.setAttribute("currEmail", buyerEmail);
 
         return "buy";
@@ -109,12 +108,6 @@ public class buyProductController {
     public String newOrder(@ModelAttribute OrderHistory buyOrder, Model model,
                            HttpServletRequest request,
                            @RequestParam("userId") Long userId){
-        //String customerEmail = (String) session.getAttribute("currEmail");
-
-       // orderService.addOrder(buyOrder, userRepo.findByEmail(customerEmail));
-
-
-       // orderRepo.save(buyOrder);
 
         model.addAttribute("buyOrder", buyOrder);
 

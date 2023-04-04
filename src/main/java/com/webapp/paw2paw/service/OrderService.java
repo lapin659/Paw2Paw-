@@ -41,7 +41,7 @@ public class OrderService {
 
     public void addOrder(OrderHistory orderHistory, User user){
         orderHistory.setUser(user);
-        orderRepository.save(orderHistory);
+      //  orderRepository.save(orderHistory);
     }
 
     public List<OrderHistory> findUserOrder(User user){

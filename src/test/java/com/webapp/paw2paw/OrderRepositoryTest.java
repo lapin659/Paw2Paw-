@@ -40,6 +40,7 @@ public class OrderRepositoryTest {
         OrderHistory savedOrder = orderRepo.save(orderHistory);
         OrderHistory existOrder = entityManager.find(OrderHistory.class, savedOrder.getOrderId());
         assertThat(existOrder.getOrderItem()).isEqualTo(orderHistory.getOrderItem());
+
         assertThat(existOrder.getUser().getUsername()).isEqualTo("customerName");
         assertThat(orderRepo.findByUser(customer).get(0).getUser().getUsername()).isEqualTo("customerName");
 

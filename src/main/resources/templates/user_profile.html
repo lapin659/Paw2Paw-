@@ -51,7 +51,8 @@
                 <p class="mb-1" th:if="${currExchange.getExchangeItem()}" th:text=" 'Traded with a  ' + ${currExchange.getExchangeItem()}">
                     Item traded</p>
                 <small th:if= "${currExchange.getOrderPrice()}" th:text= " '$' + ${currExchange.getOrderPrice()}" >Order Price</small>
-                <small th:if= "${currExchange.getBuyerMessage()}" th:text= "${currExchange.getBuyerMessage()}" >Buyer message</small>
+                <small th:if= "${currExchange.getBuyerMessage()}" th:text= " 'Your Message: ' + ${currExchange.getBuyerMessage()}" >
+                    Buyer message</small>
         </a>
         </div>
                 </div>
