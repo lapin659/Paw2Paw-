@@ -17,9 +17,9 @@ jobs:
       -
         uses: actions/setup-java@v3
         with:
-          go-version-file: java.mod
+          java-version: '17'
       -
         name: Run tests with coverage report output
-        run: go test ./... -coverprofile=coverage.out
+        run: java test ./... -coverprofile=coverage.out
       -
         uses: k1LoW/octocov-action@v0.47.2
