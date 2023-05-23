@@ -6,18 +6,19 @@ Allows users to exchange petsitting and other pet-related services; goods like m
 
 Also a community where pet owners can post topics on events, exchange pet-related information and news.
 
-Tools and frameworks
+## Tools and frameworks ##
 
-Java
-HTML5
-IntelliJ
-Maven
-Lombok
-Spring Boot/ Spring MVC
-Thymeleaf
-Bootstrap
-MySQL/ MySQL Workbench
-Hibernate
+
+* Java
+* HTML5
+* IntelliJ
+* Maven
+* Lombok
+* Spring Boot/ Spring MVC
+* Thymeleaf
+* Bootstrap
+* MySQL/ MySQL Workbench
+* Hibernate
 
 
 
